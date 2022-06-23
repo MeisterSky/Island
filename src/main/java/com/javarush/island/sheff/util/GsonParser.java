@@ -2,7 +2,6 @@ package com.javarush.island.sheff.util;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import com.javarush.island.sheff.entity.organisms.Organism;
 import com.javarush.island.sheff.repository.OrganismTypes;
 
 import java.io.FileReader;
@@ -25,11 +24,11 @@ public class GsonParser {
 
     }
 
-    public <T> T getObject(String name, Class<T> classOfT) {
-        return gson.fromJson(jsonObject.getAsJsonObject(name), classOfT);
-    }
-
     public <T> T getObject(OrganismTypes organismTypes) {
         return gson.fromJson(jsonObject.getAsJsonObject(organismTypes.getName()), organismTypes.getType());
+    }
+
+    public <T> T getObject(String name, Class<T> classOfT) {
+        return gson.fromJson(jsonObject.getAsJsonObject(name), classOfT);
     }
 }

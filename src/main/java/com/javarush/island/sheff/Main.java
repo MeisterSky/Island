@@ -10,6 +10,7 @@ public class Main {
         OrganismFactory entityFactory = OrganismFactory.INSTANCE;
         System.out.println(entityFactory);
         System.out.println(entityFactory.getNewOrganism(OrganismTypes.BEAR));
+        System.out.println(entityFactory.getNewOrganism(OrganismTypes.BEAR));
         System.out.println(entityFactory.getNewOrganism(OrganismTypes.BEAR).getClass());
 
     }

@@ -2,8 +2,11 @@ package com.javarush.island.sheff.entity.organisms.plants;
 
 import com.javarush.island.sheff.entity.organisms.Limit;
 import com.javarush.island.sheff.entity.organisms.Organism;
-import com.javarush.island.sheff.entity.organisms.animals.predators.Bear;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 public class Plant extends Organism {
 
     public static int counter = 0;

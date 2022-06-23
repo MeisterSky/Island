@@ -1,8 +1,11 @@
 package com.javarush.island.sheff.entity.organisms.animals.herbivores;
 
 import com.javarush.island.sheff.entity.organisms.Limit;
-import com.javarush.island.sheff.entity.organisms.animals.predators.Wolf;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 public class Buffalo extends Herbivore {
 
     public static int counter = 0;
@@ -15,6 +18,7 @@ public class Buffalo extends Herbivore {
         this(prototype.getName(), prototype.getColor(), prototype.getWeight(), prototype.getLimit());
         ++counter;
     }
+
 
     @Override
     public Buffalo copy() {

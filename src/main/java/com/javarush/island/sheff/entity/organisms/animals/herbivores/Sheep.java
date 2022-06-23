@@ -1,7 +1,11 @@
 package com.javarush.island.sheff.entity.organisms.animals.herbivores;
 
 import com.javarush.island.sheff.entity.organisms.Limit;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 public class Sheep extends Herbivore {
 
     public static int counter = 0;

@@ -1,8 +1,11 @@
 package com.javarush.island.sheff.entity.organisms.animals.predators;
 
 import com.javarush.island.sheff.entity.organisms.Limit;
-import com.javarush.island.sheff.entity.organisms.plants.Plant;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 public class Eagle extends Predator{
 
     public static int counter = 0;

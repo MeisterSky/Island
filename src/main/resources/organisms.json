@@ -7,7 +7,18 @@
       "maxWeight": 50,
       "maxCount": 30,
       "maxSpeed": 3,
-      "maxFood": 8.0
+      "maxFood": 8.0,
+      "ration": {
+        "horse": 10,
+        "deer": 15,
+        "rabbit": 60,
+        "mouse": 80,
+        "goat": 60,
+        "sheep": 70,
+        "boar": 15,
+        "buffalo": 10,
+        "duck": 40
+      }
     }
   },
   "boa": {
@@ -18,7 +29,13 @@
       "maxWeight": 15,
       "maxCount": 30,
       "maxSpeed": 1,
-      "maxFood": 3
+      "maxFood": 3,
+      "ration": {
+        "fox": 15,
+        "rabbit": 20,
+        "mouse": 40,
+        "duck": 10
+      }
     }
   },
   "fox": {
@@ -29,7 +46,13 @@
       "maxWeight": 8,
       "maxCount": 30,
       "maxSpeed": 2,
-      "maxFood": 2
+      "maxFood": 2,
+      "ration": {
+        "rabbit": 70,
+        "mouse": 90,
+        "duck": 60,
+        "caterpillar": 40
+      }
     }
   },
   "bear": {
@@ -40,7 +63,19 @@
       "maxWeight": 500,
       "maxCount": 5,
       "maxSpeed": 2,
-      "maxFood": 80
+      "maxFood": 80,
+      "ration": {
+        "boa": 80,
+        "horse": 40,
+        "deer": 80,
+        "rabbit": 80,
+        "mouse": 90,
+        "goat": 70,
+        "sheep": 70,
+        "boar": 50,
+        "buffalo": 20,
+        "duck": 10
+      }
     }
   },
   "eagle": {
@@ -51,7 +86,13 @@
       "maxWeight": 6,
       "maxCount": 20,
       "maxSpeed": 3,
-      "maxFood": 1
+      "maxFood": 1,
+      "ration": {
+        "fox": 10,
+        "rabbit": 90,
+        "mouse": 90,
+        "duck": 80
+      }
     }
   },
   "horse": {
@@ -62,7 +103,10 @@
       "maxWeight": 400,
       "maxCount": 20,
       "maxSpeed": 4,
-      "maxFood": 60
+      "maxFood": 60,
+      "ration": {
+        "plant": 100
+      }
     }
   },
   "deer": {
@@ -73,7 +117,10 @@
       "maxWeight": 300,
       "maxCount": 20,
       "maxSpeed": 4,
-      "maxFood": 50
+      "maxFood": 50,
+      "ration": {
+        "plant": 100
+      }
     }
   },
   "rabbit": {
@@ -84,7 +131,10 @@
       "maxWeight": 2,
       "maxCount": 150,
       "maxSpeed": 2,
-      "maxFood": 0.45
+      "maxFood": 0.45,
+      "ration": {
+        "plant": 100
+      }
     }
   },
   "mouse": {
@@ -95,7 +145,11 @@
       "maxWeight": 0.05,
       "maxCount": 500,
       "maxSpeed": 1,
-      "maxFood": 0.01
+      "maxFood": 0.01,
+      "ration": {
+        "plant": 100,
+        "caterpillar": 90
+      }
     }
   },
   "goat": {
@@ -106,7 +160,10 @@
       "maxWeight": 60,
       "maxCount": 140,
       "maxSpeed": 3,
-      "maxFood": 10
+      "maxFood": 10,
+      "ration": {
+        "plant": 100
+      }
     }
   },
   "sheep": {
@@ -117,7 +174,10 @@
       "maxWeight": 70,
       "maxCount": 140,
       "maxSpeed": 3,
-      "maxFood": 15
+      "maxFood": 15,
+      "ration": {
+        "plant": 100
+      }
     }
   },
   "boar": {
@@ -128,7 +188,12 @@
       "maxWeight": 400,
       "maxCount": 50,
       "maxSpeed": 2,
-      "maxFood": 50
+      "maxFood": 50,
+      "ration": {
+        "mouse": 50,
+        "caterpillar": 90,
+        "plant": 100
+      }
     }
   },
   "buffalo": {
@@ -139,7 +204,10 @@
       "maxWeight": 700,
       "maxCount": 10,
       "maxSpeed": 3,
-      "maxFood": 100
+      "maxFood": 100,
+      "ration": {
+        "plant": 100
+      }
     }
   },
   "duck": {
@@ -150,7 +218,11 @@
       "maxWeight": 1,
       "maxCount": 200,
       "maxSpeed": 4,
-      "maxFood": 0.15
+      "maxFood": 0.15,
+      "ration": {
+        "caterpillar": 90,
+        "plant": 100
+      }
     }
   },
   "caterpillar": {
@@ -161,7 +233,10 @@
       "maxWeight": 0.01,
       "maxCount": 1000,
       "maxSpeed": 0,
-      "maxFood": 0
+      "maxFood": 0,
+      "ration": {
+        "plant": 100
+      }
     }
   },
   "plant": {
