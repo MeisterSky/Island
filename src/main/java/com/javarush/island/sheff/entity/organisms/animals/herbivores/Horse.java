@@ -6,10 +6,22 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class Horse extends Herbivore{
+public class Horse extends Herbivore {
+
+    public static int counter = 0;
 
     public Horse(String name, String color, double weight, Limit limit) {
         super(name, color, weight, limit);
+    }
+
+    public Horse(Horse prototype) {
+        this(prototype.getName(), prototype.getColor(), prototype.getWeight(), prototype.getLimit());
+        ++counter;
+    }
+
+    @Override
+    public Horse copy() {
+        return new Horse(this);
     }
 
     @Override

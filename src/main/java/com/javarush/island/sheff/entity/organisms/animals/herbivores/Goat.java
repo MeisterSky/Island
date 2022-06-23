@@ -2,9 +2,22 @@ package com.javarush.island.sheff.entity.organisms.animals.herbivores;
 
 import com.javarush.island.sheff.entity.organisms.Limit;
 
-public class Goat extends Herbivore{
+public class Goat extends Herbivore {
+
+    public static int counter = 0;
+
     public Goat(String name, String color, double weight, Limit limit) {
         super(name, color, weight, limit);
+    }
+
+    public Goat(Goat prototype) {
+        this(prototype.getName(), prototype.getColor(), prototype.getWeight(), prototype.getLimit());
+        ++counter;
+    }
+
+    @Override
+    public Goat copy() {
+        return new Goat(this);
     }
 
     @Override

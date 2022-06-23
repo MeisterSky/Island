@@ -3,12 +3,10 @@ package com.javarush.island.sheff.repository;
 import com.javarush.island.sheff.entity.organisms.animals.herbivores.*;
 import com.javarush.island.sheff.entity.organisms.animals.predators.*;
 import com.javarush.island.sheff.entity.organisms.plants.Plant;
-import lombok.Getter;
 import lombok.Setter;
 
-@Getter
 @Setter
-public class Entity {
+public class Entities {
 
     private Wolf wolf;
     private Boa boa;

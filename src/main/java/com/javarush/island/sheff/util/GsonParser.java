@@ -1,26 +1,35 @@
 package com.javarush.island.sheff.util;
 
 import com.google.gson.Gson;
-import com.javarush.island.sheff.repository.Entity;
+import com.google.gson.JsonObject;
+import com.javarush.island.sheff.entity.organisms.Organism;
+import com.javarush.island.sheff.repository.OrganismTypes;
 
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Path;
 
 public class GsonParser {
 
-    public Entity parse() {
+    Gson gson = new Gson();
+    JsonObject jsonObject;
 
-        Gson gson = new Gson();
+    public GsonParser(Path pathFile) {
 
-        try (FileReader reader = new FileReader("src/main/resources/animals.json")) {
-
-            return gson.fromJson(reader, Entity.class);
+        try (FileReader reader = new FileReader(pathFile.toFile())) {
+            jsonObject = gson.fromJson(reader, JsonObject.class);
 
         } catch (IOException e) {
             System.out.println("Parsing error " + e);
         }
 
-        return null;
+    }
+
+    public <T> T getObject(String name, Class<T> classOfT) {
+        return gson.fromJson(jsonObject.getAsJsonObject(name), classOfT);
+    }
+
+    public <T> T getObject(OrganismTypes organismTypes) {
+        return gson.fromJson(jsonObject.getAsJsonObject(organismTypes.getName()), organismTypes.getType());
     }
 }
