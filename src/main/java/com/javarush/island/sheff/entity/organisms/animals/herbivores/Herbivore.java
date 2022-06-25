@@ -5,7 +5,7 @@ import com.javarush.island.sheff.entity.organisms.animals.Animal;
 
 public abstract class Herbivore extends Animal {
 
-    public Herbivore(String name, String color, double weight, Limit limit) {
-        super(name, color, weight, limit);
+    public Herbivore(String name, String color, double weight, int[] offspring, Limit limit) {
+        super(name, color, weight, offspring, limit);
     }
 }

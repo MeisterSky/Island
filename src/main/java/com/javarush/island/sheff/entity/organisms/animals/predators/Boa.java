@@ -8,29 +8,19 @@ import lombok.Setter;
 @Setter
 public class Boa extends Predator{
 
-    public static int counter = 0;
+    public static int id = 0;
 
-    public Boa(String name, String color, double weight, Limit limit) {
-        super(name, color, weight, limit);
+    public Boa(String name, String color, double weight, int[] offspring, Limit limit) {
+        super(name, color, weight, offspring, limit);
     }
 
     public Boa(Boa prototype) {
-        this(prototype.getName(), prototype.getColor(), prototype.getWeight(), prototype.getLimit());
-        ++counter;
+        this(prototype.getName(), prototype.getColor(), prototype.getWeight(), prototype.getOffspring(), prototype.getLimit());
+        ++id;
     }
 
     @Override
     public Boa copy() {
         return new Boa(this);
-    }
-
-    @Override
-    public String toString() {
-        return "Boa{" +
-                "name='" + name + '\'' +
-                ", color='" + color + '\'' +
-                ", weight=" + weight +
-                ", limit=" + limit +
-                '}';
     }
 }

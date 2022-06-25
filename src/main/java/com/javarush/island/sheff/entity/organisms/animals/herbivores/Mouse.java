@@ -8,29 +8,19 @@ import lombok.Setter;
 @Setter
 public class Mouse extends Herbivore {
 
-    public static int counter = 0;
+    public static int id;
 
-    public Mouse(String name, String color, double weight, Limit limit) {
-        super(name, color, weight, limit);
+    public Mouse(String name, String color, double weight, int[] offspring, Limit limit) {
+        super(name, color, weight, offspring, limit);
     }
 
     public Mouse(Mouse prototype) {
-        this(prototype.getName(), prototype.getColor(), prototype.getWeight(), prototype.getLimit());
-        ++counter;
+        this(prototype.getName(), prototype.getColor(), prototype.getWeight(), prototype.getOffspring(), prototype.getLimit());
+        ++id;
     }
 
     @Override
     public Mouse copy() {
         return new Mouse(this);
-    }
-
-    @Override
-    public String toString() {
-        return "Mouse{" +
-                "name='" + name + '\'' +
-                ", color='" + color + '\'' +
-                ", weight=" + weight +
-                ", limit=" + limit +
-                '}';
     }
 }

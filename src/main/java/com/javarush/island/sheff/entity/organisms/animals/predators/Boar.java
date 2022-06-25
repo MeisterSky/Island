@@ -8,29 +8,19 @@ import lombok.Setter;
 @Setter
 public class Boar extends Predator{
 
-    public static int counter = 0;
+    public static int id;
 
-    public Boar(String name, String color, double weight, Limit limit) {
-        super(name, color, weight, limit);
+    public Boar(String name, String color, double weight, int[] offspring, Limit limit) {
+        super(name, color, weight, offspring, limit);
     }
 
     public Boar(Boar prototype) {
-        this(prototype.getName(), prototype.getColor(), prototype.getWeight(), prototype.getLimit());
-        ++counter;
+        this(prototype.getName(), prototype.getColor(), prototype.getWeight(), prototype.getOffspring(), prototype.getLimit());
+        ++id;
     }
 
     @Override
     public Boar copy() {
         return new Boar(this);
-    }
-
-    @Override
-    public String toString() {
-        return "Boar{" +
-                "name='" + name + '\'' +
-                ", color='" + color + '\'' +
-                ", weight=" + weight +
-                ", limit=" + limit +
-                '}';
     }
 }

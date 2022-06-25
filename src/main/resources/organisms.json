@@ -1,62 +1,6 @@
 {
-  "wolf": {
-    "name": "Wolf",
-    "color": "Gray",
-    "weight": 50,
-    "limit": {
-      "maxWeight": 50,
-      "maxCount": 30,
-      "maxSpeed": 3,
-      "maxFood": 8.0,
-      "ration": {
-        "horse": 10,
-        "deer": 15,
-        "rabbit": 60,
-        "mouse": 80,
-        "goat": 60,
-        "sheep": 70,
-        "boar": 15,
-        "buffalo": 10,
-        "duck": 40
-      }
-    }
-  },
-  "boa": {
-    "name": "Boa",
-    "color": "Yellow",
-    "weight": 15,
-    "limit": {
-      "maxWeight": 15,
-      "maxCount": 30,
-      "maxSpeed": 1,
-      "maxFood": 3,
-      "ration": {
-        "fox": 15,
-        "rabbit": 20,
-        "mouse": 40,
-        "duck": 10
-      }
-    }
-  },
-  "fox": {
-    "name": "fox",
-    "color": "Orange",
-    "weight": 8,
-    "limit": {
-      "maxWeight": 8,
-      "maxCount": 30,
-      "maxSpeed": 2,
-      "maxFood": 2,
-      "ration": {
-        "rabbit": 70,
-        "mouse": 90,
-        "duck": 60,
-        "caterpillar": 40
-      }
-    }
-  },
   "bear": {
-    "name": "bear",
+    "name": "Bear",
     "color": "Brown",
     "weight": 500,
     "limit": {
@@ -64,6 +8,7 @@
       "maxCount": 5,
       "maxSpeed": 2,
       "maxFood": 80,
+      "offspring" : [1, 2],
       "ration": {
         "boa": 80,
         "horse": 40,
@@ -78,32 +23,66 @@
       }
     }
   },
-  "eagle": {
-    "name": "eagle",
-    "color": "Brown",
-    "weight": 6,
+  "boa": {
+    "name": "Boa",
+    "color": "Yellow",
+    "weight": 15,
     "limit": {
-      "maxWeight": 6,
-      "maxCount": 20,
-      "maxSpeed": 3,
-      "maxFood": 1,
+      "maxWeight": 15,
+      "maxCount": 30,
+      "maxSpeed": 1,
+      "maxFood": 3,
+      "offspring" : [1, 3],
       "ration": {
-        "fox": 10,
-        "rabbit": 90,
-        "mouse": 90,
-        "duck": 80
+        "fox": 15,
+        "rabbit": 20,
+        "mouse": 40,
+        "duck": 10
       }
     }
   },
-  "horse": {
-    "name": "Horse",
-    "color": "Black",
+  "boar": {
+    "name": "Boar",
+    "color": "Brown",
     "weight": 400,
     "limit": {
       "maxWeight": 400,
-      "maxCount": 20,
-      "maxSpeed": 4,
-      "maxFood": 60,
+      "maxCount": 50,
+      "maxSpeed": 2,
+      "maxFood": 50,
+      "offspring" : [3, 5],
+      "ration": {
+        "mouse": 50,
+        "caterpillar": 90,
+        "plant": 100
+      }
+    }
+  },
+  "buffalo": {
+    "name": "Buffalo",
+    "color": "Brown",
+    "weight": 700,
+    "limit": {
+      "maxWeight": 700,
+      "maxCount": 10,
+      "maxSpeed": 3,
+      "maxFood": 100,
+      "offspring" : [1, 1],
+      "ration": {
+        "plant": 100
+      }
+    }
+  },
+  "caterpillar": {
+    "name": "Caterpillar",
+    "color": "Green",
+    "weight": 0.01,
+    "limit": {
+      "maxWeight": 0.01,
+      "maxCount": 1000,
+      "maxSpeed": 0,
+      "maxFood": 0,
+      "offspring" : [50, 70],
       "ration": {
         "plant": 100
       }
@@ -118,100 +97,14 @@
       "maxCount": 20,
       "maxSpeed": 4,
       "maxFood": 50,
-      "ration": {
-        "plant": 100
-      }
-    }
-  },
-  "rabbit": {
-    "name": "rabbit",
-    "color": "White",
-    "weight": 2,
-    "limit": {
-      "maxWeight": 2,
-      "maxCount": 150,
-      "maxSpeed": 2,
-      "maxFood": 0.45,
-      "ration": {
-        "plant": 100
-      }
-    }
-  },
-  "mouse": {
-    "name": "mouse",
-    "color": "Gray",
-    "weight": 0.05,
-    "limit": {
-      "maxWeight": 0.05,
-      "maxCount": 500,
-      "maxSpeed": 1,
-      "maxFood": 0.01,
-      "ration": {
-        "plant": 100,
-        "caterpillar": 90
-      }
-    }
-  },
-  "goat": {
-    "name": "goat",
-    "color": "Gray",
-    "weight": 60,
-    "limit": {
-      "maxWeight": 60,
-      "maxCount": 140,
-      "maxSpeed": 3,
-      "maxFood": 10,
-      "ration": {
-        "plant": 100
-      }
-    }
-  },
-  "sheep": {
-    "name": "sheep",
-    "color": "White",
-    "weight": 70,
-    "limit": {
-      "maxWeight": 70,
-      "maxCount": 140,
-      "maxSpeed": 3,
-      "maxFood": 15,
-      "ration": {
-        "plant": 100
-      }
-    }
-  },
-  "boar": {
-    "name": "boar",
-    "color": "Brown",
-    "weight": 400,
-    "limit": {
-      "maxWeight": 400,
-      "maxCount": 50,
-      "maxSpeed": 2,
-      "maxFood": 50,
-      "ration": {
-        "mouse": 50,
-        "caterpillar": 90,
-        "plant": 100
-      }
-    }
-  },
-  "buffalo": {
-    "name": "buffalo",
-    "color": "Brown",
-    "weight": 700,
-    "limit": {
-      "maxWeight": 700,
-      "maxCount": 10,
-      "maxSpeed": 3,
-      "maxFood": 100,
+      "offspring" : [1, 2],
       "ration": {
         "plant": 100
       }
     }
   },
   "duck": {
-    "name": "duck",
+    "name": "Duck",
     "color": "Yellow",
     "weight": 1,
     "limit": {
@@ -219,35 +112,158 @@
       "maxCount": 200,
       "maxSpeed": 4,
       "maxFood": 0.15,
+      "offspring" : [5, 10],
       "ration": {
         "caterpillar": 90,
         "plant": 100
       }
     }
   },
-  "caterpillar": {
-    "name": "caterpillar",
-    "color": "Green",
-    "weight": 0.01,
+  "eagle": {
+    "name": "Eagle",
+    "color": "Brown",
+    "weight": 6,
     "limit": {
-      "maxWeight": 0.01,
-      "maxCount": 1000,
-      "maxSpeed": 0,
-      "maxFood": 0,
+      "maxWeight": 6,
+      "maxCount": 20,
+      "maxSpeed": 3,
+      "maxFood": 1,
+      "offspring" : [2, 3],
+      "ration": {
+        "fox": 10,
+        "rabbit": 90,
+        "mouse": 90,
+        "duck": 80
+      }
+    }
+  },
+  "fox": {
+    "name": "Fox",
+    "color": "Orange",
+    "weight": 8,
+    "limit": {
+      "maxWeight": 8,
+      "maxCount": 30,
+      "maxSpeed": 2,
+      "maxFood": 2,
+      "offspring" : [1, 3],
+      "ration": {
+        "rabbit": 70,
+        "mouse": 90,
+        "duck": 60,
+        "caterpillar": 40
+      }
+    }
+  },
+  "goat": {
+    "name": "Goat",
+    "color": "Gray",
+    "weight": 60,
+    "limit": {
+      "maxWeight": 60,
+      "maxCount": 140,
+      "maxSpeed": 3,
+      "maxFood": 10,
+      "offspring" : [5, 7],
       "ration": {
         "plant": 100
       }
     }
   },
+  "horse": {
+    "name": "Horse",
+    "color": "Black",
+    "weight": 400,
+    "limit": {
+      "maxWeight": 400,
+      "maxCount": 20,
+      "maxSpeed": 4,
+      "maxFood": 60,
+      "offspring" : [1, 1],
+      "ration": {
+        "plant": 100
+      }
+    }
+  },
+  "mouse": {
+    "name": "Mouse",
+    "color": "Gray",
+    "weight": 0.05,
+    "limit": {
+      "maxWeight": 0.05,
+      "maxCount": 500,
+      "maxSpeed": 1,
+      "maxFood": 0.01,
+      "offspring" : [5, 10],
+      "ration": {
+        "plant": 100,
+        "caterpillar": 90
+      }
+    }
+  },
   "plant": {
-    "name": "plant",
+    "name": "Plant",
     "color": "Green",
     "weight": 1,
     "limit": {
       "maxWeight": 1,
       "maxCount": 200,
       "maxSpeed": 0,
-      "maxFood": 0
+      "maxFood": 0,
+      "offspring" : [50, 80]
+    }
+  },
+  "rabbit": {
+    "name": "Rabbit",
+    "color": "White",
+    "weight": 2,
+    "limit": {
+      "maxWeight": 2,
+      "maxCount": 150,
+      "maxSpeed": 2,
+      "maxFood": 0.45,
+      "offspring" : [2, 4],
+      "ration": {
+        "plant": 100
+      }
+    }
+  },
+  "sheep": {
+    "name": "Sheep",
+    "color": "White",
+    "weight": 70,
+    "limit": {
+      "maxWeight": 70,
+      "maxCount": 140,
+      "maxSpeed": 3,
+      "maxFood": 15,
+      "offspring" : [1, 3],
+      "ration": {
+        "plant": 100
+      }
+    }
+  },
+  "wolf": {
+    "name": "Wolf",
+    "color": "Gray",
+    "weight": 50,
+    "limit": {
+      "maxWeight": 50,
+      "maxCount": 30,
+      "maxSpeed": 3,
+      "maxFood": 8.0,
+      "offspring" : [1, 3],
+      "ration": {
+        "horse": 10,
+        "deer": 15,
+        "rabbit": 60,
+        "mouse": 80,
+        "goat": 60,
+        "sheep": 70,
+        "boar": 15,
+        "buffalo": 10,
+        "duck": 40
+      }
     }
   }
 }

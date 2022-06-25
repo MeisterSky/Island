@@ -11,12 +11,12 @@ public class Plant extends Organism {
 
     public static int counter = 0;
 
-    public Plant(String name, String color, double weight, Limit limit) {
-        super(name, color, weight, limit);
+    public Plant(String name, String color, double weight, int[] offspring, Limit limit) {
+        super(name, color, weight, offspring, limit);
     }
 
     public Plant(Plant prototype) {
-        this(prototype.getName(), prototype.getColor(), prototype.getWeight(), prototype.getLimit());
+        this(prototype.getName(), prototype.getColor(), prototype.getWeight(), prototype.getOffspring(), prototype.getLimit());
         ++counter;
     }
 

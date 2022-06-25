@@ -8,12 +8,12 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Path;
 
-public class GsonParser {
+public class JsonParser {
 
     Gson gson = new Gson();
     JsonObject jsonObject;
 
-    public GsonParser(Path pathFile) {
+    public JsonParser(Path pathFile) {
 
         try (FileReader reader = new FileReader(pathFile.toFile())) {
             jsonObject = gson.fromJson(reader, JsonObject.class);
@@ -25,10 +25,6 @@ public class GsonParser {
     }
 
     public <T> T getObject(OrganismTypes organismTypes) {
-        return gson.fromJson(jsonObject.getAsJsonObject(organismTypes.getName()), organismTypes.getType());
-    }
-
-    public <T> T getObject(String name, Class<T> classOfT) {
-        return gson.fromJson(jsonObject.getAsJsonObject(name), classOfT);
+        return gson.fromJson(jsonObject.getAsJsonObject(organismTypes.getName().toLowerCase()), organismTypes.getType());
     }
 }

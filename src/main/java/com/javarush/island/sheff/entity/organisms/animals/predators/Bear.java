@@ -8,15 +8,15 @@ import lombok.Setter;
 @Setter
 public class Bear extends Predator{
 
-    public static int counter = 0;
+    public static int id;
 
-    public Bear(String name, String color, double weight, Limit limit) {
-        super(name, color, weight, limit);
+    public Bear(String name, String color, double weight, int[] offspring, Limit limit) {
+        super(name, color, weight, offspring, limit);
     }
 
     public Bear(Bear prototype) {
-        this(prototype.getName(), prototype.getColor(), prototype.getWeight(), prototype.getLimit());
-        ++counter;
+        this(prototype.getName(), prototype.getColor(), prototype.getWeight(), prototype.getOffspring(), prototype.getLimit());
+        ++id;
     }
 
     @Override
@@ -24,13 +24,4 @@ public class Bear extends Predator{
         return new Bear(this);
     }
 
-    @Override
-    public String toString() {
-        return "Bear №" + counter + "{" +
-                "name='" + name + '\'' +
-                ", color='" + color + '\'' +
-                ", weight=" + weight +
-                ", limit=" + limit +
-                '}';
-    }
 }

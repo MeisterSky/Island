@@ -8,29 +8,19 @@ import lombok.Setter;
 @Setter
 public class Deer extends Herbivore {
 
-    public static int counter = 0;
+    public static int id;
 
-    public Deer(String name, String color, double weight, Limit limit) {
-        super(name, color, weight, limit);
+    public Deer(String name, String color, double weight, int[] offspring, Limit limit) {
+        super(name, color, weight, offspring, limit);
     }
 
     public Deer(Deer prototype) {
-        this(prototype.getName(), prototype.getColor(), prototype.getWeight(), prototype.getLimit());
-        ++counter;
+        this(prototype.getName(), prototype.getColor(), prototype.getWeight(), prototype.getOffspring(), prototype.getLimit());
+        ++id;
     }
 
     @Override
     public Deer copy() {
         return new Deer(this);
-    }
-
-    @Override
-    public String toString() {
-        return "Deer{" +
-                "name='" + name + '\'' +
-                ", color='" + color + '\'' +
-                ", weight=" + weight +
-                ", limit=" + limit +
-                '}';
     }
 }

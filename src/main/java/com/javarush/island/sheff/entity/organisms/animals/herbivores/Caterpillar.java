@@ -8,29 +8,19 @@ import lombok.Setter;
 @Setter
 public class Caterpillar extends Herbivore {
 
-    public static int counter = 0;
+    public static int id;
 
-    public Caterpillar(String name, String color, double weight, Limit limit) {
-        super(name, color, weight, limit);
+    public Caterpillar(String name, String color, double weight, int[] offspring, Limit limit) {
+        super(name, color, weight, offspring, limit);
     }
 
     public Caterpillar(Caterpillar prototype) {
-        this(prototype.getName(), prototype.getColor(), prototype.getWeight(), prototype.getLimit());
-        ++counter;
+        this(prototype.getName(), prototype.getColor(), prototype.getWeight(), prototype.getOffspring(), prototype.getLimit());
+        ++id;
     }
 
     @Override
     public Caterpillar copy() {
         return new Caterpillar(this);
-    }
-
-    @Override
-    public String toString() {
-        return "Caterpillar{" +
-                "name='" + name + '\'' +
-                ", color='" + color + '\'' +
-                ", weight=" + weight +
-                ", limit=" + limit +
-                '}';
     }
 }

@@ -8,29 +8,19 @@ import lombok.Setter;
 @Setter
 public class Goat extends Herbivore {
 
-    public static int counter = 0;
+    public static int id;
 
-    public Goat(String name, String color, double weight, Limit limit) {
-        super(name, color, weight, limit);
+    public Goat(String name, String color, double weight, int[] offspring, Limit limit) {
+        super(name, color, weight, offspring, limit);
     }
 
     public Goat(Goat prototype) {
-        this(prototype.getName(), prototype.getColor(), prototype.getWeight(), prototype.getLimit());
-        ++counter;
+        this(prototype.getName(), prototype.getColor(), prototype.getWeight(), prototype.getOffspring(), prototype.getLimit());
+        ++id;
     }
 
     @Override
     public Goat copy() {
         return new Goat(this);
-    }
-
-    @Override
-    public String toString() {
-        return "Goat{" +
-                "name='" + name + '\'' +
-                ", color='" + color + '\'' +
-                ", weight=" + weight +
-                ", limit=" + limit +
-                '}';
     }
 }

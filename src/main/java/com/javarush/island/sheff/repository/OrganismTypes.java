@@ -10,22 +10,22 @@ import java.lang.reflect.Type;
 @Getter
 public enum OrganismTypes {
 
-    BEAR("bear", Bear.class),
-    BOA("boa", Boa.class),
-    BOAR("boar", Boar.class),
-    BUFFALO("buffalo", Buffalo.class),
-    CATERPILLAR("caterpillar", Caterpillar.class),
-    DEER("deer", Deer.class),
-    DUCK("duck", Duck.class),
-    EAGLE("eagle", Eagle.class),
-    FOX("fox", Fox.class),
-    GOAT("goat", Goat.class),
-    HORSE("horse", Horse.class),
-    MOUSE("mouse", Mouse.class),
-    PLANT("plant", Plant.class),
-    RABBIT("rabbit", Rabbit.class),
-    SHEEP("sheep", Sheep.class),
-    WOLF("wolf", Wolf.class);
+    BEAR("Bear", Bear.class),
+    BOA("Boa", Boa.class),
+    BOAR("Boar", Boar.class),
+    BUFFALO("Buffalo", Buffalo.class),
+    CATERPILLAR("Caterpillar", Caterpillar.class),
+    DEER("Deer", Deer.class),
+    DUCK("Duck", Duck.class),
+    EAGLE("Eagle", Eagle.class),
+    FOX("Fox", Fox.class),
+    GOAT("Goat", Goat.class),
+    HORSE("Horse", Horse.class),
+    MOUSE("Mouse", Mouse.class),
+    PLANT("Plant", Plant.class),
+    RABBIT("Rabbit", Rabbit.class),
+    SHEEP("Sheep", Sheep.class),
+    WOLF("Wolf", Wolf.class);
 
     private final String name;
     private final Type type;
