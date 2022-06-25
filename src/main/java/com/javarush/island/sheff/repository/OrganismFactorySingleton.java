@@ -1,23 +1,25 @@
 package com.javarush.island.sheff.repository;
 
 import com.google.common.collect.ImmutableMap;
-import com.javarush.island.sheff.entity.organisms.Organism;
+import com.javarush.island.sheff.entities.organisms.Organism;
 import com.javarush.island.sheff.util.JsonParser;
 import lombok.Getter;
 
 import java.nio.file.Path;
-import java.util.Objects;
+import java.util.*;
 
 @Getter
-public enum OrganismFactorySingleton implements Factory {
+public enum OrganismFactorySingleton implements OrganismFactory {
     INSTANCE;
+
+    private static final String PATH = "src/main/resources/organisms.json";
 
     private final JsonParser gsonParser;
     private final ImmutableMap<String, Organism> organismMap;
 
     OrganismFactorySingleton() {
 
-        gsonParser = new JsonParser(Path.of("src/main/resources/organisms.json"));
+        gsonParser = new JsonParser(Path.of(PATH).toFile());
 
         organismMap = ImmutableMap.<String, Organism>builder()
                 .put(OrganismTypes.BEAR.getName(), gsonParser.getObject(OrganismTypes.BEAR))

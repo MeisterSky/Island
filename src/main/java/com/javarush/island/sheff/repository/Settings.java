@@ -11,22 +11,22 @@ public enum Settings {
     DURATION,
     LEFT,
     START,
-    NUMBER_OF_BEARS,
-    NUMBER_OF_BOAS,
-    NUMBER_OF_BOARS,
-    NUMBER_OF_BUFFALOES,
-    NUMBER_OF_CATERPILLARS,
-    NUMBER_OF_DEER,
-    NUMBER_OF_DUCKS,
-    NUMBER_OF_EAGLES,
-    NUMBER_OF_FOXES,
-    NUMBER_OF_GOATS,
-    NUMBER_OF_HORSES,
-    NUMBER_OF_MOUSES,
-    NUMBER_OF_PLANTS,
-    NUMBER_OF_RABBITS,
-    NUMBER_OF_SHEEP,
-    NUMBER_OF_WOLFS;
+    COUNT_OF_BEAR,
+    COUNT_OF_BOA,
+    COUNT_OF_BOAR,
+    COUNT_OF_BUFFALO,
+    COUNT_OF_CATERPILLAR,
+    COUNT_OF_DEER,
+    COUNT_OF_DUCK,
+    COUNT_OF_EAGLE,
+    COUNT_OF_FOX,
+    COUNT_OF_GOAT,
+    COUNT_OF_HORSE,
+    COUNT_OF_MOUSE,
+    COUNT_OF_PLANT,
+    COUNT_OF_RABBIT,
+    COUNT_OF_SHEEP,
+    COUNT_OF_WOLF;
 
     private static final String PATH = "/config.properties";
 
@@ -47,7 +47,7 @@ public enum Settings {
         value = Integer.parseInt((String) properties
                 .get(Stream.of(this.toString().split("_"))
                         .reduce((first, last) -> last)
-                        .get()
+                        .orElse("default")
                         .toLowerCase()));
     }
 

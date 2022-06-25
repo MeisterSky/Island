@@ -1,21 +1,43 @@
 package com.javarush.island.sheff;
 
+import com.javarush.island.sheff.entities.map.Cell;
+import com.javarush.island.sheff.entities.map.GameMap;
+import com.javarush.island.sheff.entities.organisms.Organism;
 import com.javarush.island.sheff.repository.*;
+
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 public class Main {
 
     public static void main(String[] args) {
 
-        Factory organismFactory = OrganismFactorySingleton.INSTANCE;
+        OrganismFactory organismFactory = OrganismFactorySingleton.INSTANCE;
         GameMapCreator gameMapCreator = new GameMapCreator(organismFactory);
-        int rows = Settings.ROWS.getValue();
-        int cols = Settings.COLS.getValue();
-        int bear = Settings.NUMBER_OF_BEARS.getValue();
+
+        int bear = Settings.COUNT_OF_BEAR.getValue();
         int start = Settings.START.getValue();
-        int eagle = Settings.NUMBER_OF_EAGLES.getValue();
+        int eagle = Settings.COUNT_OF_EAGLE.getValue();
 
-        System.out.println(rows + " " + cols + " " + bear + " " + start + " " + eagle);
+        GameMap gameMap = gameMapCreator.createRandomStartedGameMap();
 
+        System.out.println("Линий: " + gameMap.getCells().length);
+        for (Cell[] rows : gameMap.getCells()) {
+            System.out.println("Колонок: " + rows.length);
+            for (Cell cells : rows) {
+                System.out.println("Ключей: " + cells.getResidents().size());
+                for (Map.Entry<String, Set<Organism>> organismNames : cells.getResidents().entrySet()) {
+                    System.out.println("Организмов " + organismNames.getKey() + ": " + organismNames.getKey().length());
+                    for (Organism organisms : organismNames.getValue()) {
+                        System.out.println("Организм " + organisms);
+                    }
+                }
+            }
+
+        }
+
+        System.out.println(bear + " " + start + " " + eagle);
         System.out.println(organismFactory);
         System.out.println(organismFactory.getNewOrganism(OrganismTypes.BEAR));
         System.out.println(organismFactory.getNewOrganism(OrganismTypes.BOA));

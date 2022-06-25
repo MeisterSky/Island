@@ -1,8 +1,8 @@
 package com.javarush.island.sheff.repository;
 
-import com.javarush.island.sheff.entity.organisms.animals.herbivores.*;
-import com.javarush.island.sheff.entity.organisms.animals.predators.*;
-import com.javarush.island.sheff.entity.organisms.plants.Plant;
+import com.javarush.island.sheff.entities.organisms.animals.herbivores.*;
+import com.javarush.island.sheff.entities.organisms.animals.predators.*;
+import com.javarush.island.sheff.entities.organisms.plants.Plant;
 import lombok.Getter;
 
 import java.lang.reflect.Type;
