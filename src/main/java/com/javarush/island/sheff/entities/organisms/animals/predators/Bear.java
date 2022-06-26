@@ -1,7 +1,6 @@
 package com.javarush.island.sheff.entities.organisms.animals.predators;
 
 import com.javarush.island.sheff.entities.organisms.Limit;
-import com.javarush.island.sheff.entities.organisms.Organism;
 import lombok.Getter;
 import lombok.Setter;
 

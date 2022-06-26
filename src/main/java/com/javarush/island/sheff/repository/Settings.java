@@ -8,6 +8,7 @@ import java.util.stream.Stream;
 public enum Settings {
     ROWS,
     COLS,
+    DEFAULT,
     DURATION,
     LEFT,
     START,
@@ -47,7 +48,7 @@ public enum Settings {
         value = Integer.parseInt((String) properties
                 .get(Stream.of(this.toString().split("_"))
                         .reduce((first, last) -> last)
-                        .orElse("default")
+                        .orElse(DEFAULT.toString())
                         .toLowerCase()));
     }
 

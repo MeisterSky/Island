@@ -204,10 +204,10 @@
   "plant": {
     "name": "Plant",
     "color": "Green",
-    "weight": 1,
+    "weight": 200,
     "limit": {
       "maxWeight": 1,
-      "maxCount": 200,
+      "maxCount": 1,
       "maxSpeed": 0,
       "maxFood": 0,
       "offspring" : [50, 80]

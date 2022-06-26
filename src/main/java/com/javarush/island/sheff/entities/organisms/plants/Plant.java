@@ -1,5 +1,6 @@
 package com.javarush.island.sheff.entities.organisms.plants;
 
+import com.javarush.island.sheff.entities.abstraction.behavior.Breeding;
 import com.javarush.island.sheff.entities.organisms.Limit;
 import com.javarush.island.sheff.entities.organisms.Organism;
 import lombok.Getter;
@@ -7,7 +8,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class Plant extends Organism {
+public class Plant extends Organism implements Breeding {
 
     private static int ids;
 
@@ -22,5 +23,10 @@ public class Plant extends Organism {
     @Override
     public Plant copy() {
         return new Plant(this);
+    }
+
+    @Override
+    public void spawn() {
+        this.weight = this.weight < this.limit.getMaxWeight() - this.limit.getMaxWeight() / 2 ? this.weight * 0.5 : this.limit.getMaxWeight();
     }
 }

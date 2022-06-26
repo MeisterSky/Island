@@ -45,6 +45,12 @@ public enum OrganismFactorySingleton implements OrganismFactory {
         return Objects.requireNonNull(organismMap.get(organismType.getName())).copy();
     }
 
+    public Map<String, HashSet<Organism>> getOrganismNamesMap() {
+        Map<String, HashSet<Organism>> organismMap = new HashMap<>();
+        this.organismMap.forEach((k, v) -> organismMap.put(k, new HashSet<>()));
+        return organismMap;
+    }
+
     @Override
     public String toString() {
         return "OrganismFactorySingleton{" +

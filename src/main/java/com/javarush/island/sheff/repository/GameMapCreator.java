@@ -5,39 +5,55 @@ import com.javarush.island.sheff.entities.map.GameMap;
 import com.javarush.island.sheff.util.Randomizer;
 
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public record GameMapCreator(OrganismFactory organismFactory) {
 
+    public GameMap getEmptyGameMap(int rows, int cols) {
+
+        return new GameMap(rows, cols);
+    }
+
     public GameMap createRandomStartedGameMap() {
         int rows = Settings.ROWS.getValue();
         int cols = Settings.COLS.getValue();
+        int startingQuantity = Settings.START.getValue();
         GameMap gameMap = new GameMap(rows, cols);
+
         Cell[][] cells = gameMap.getCells();
-        for (int row = 0; row < cells.length; row++) {
-            for (int col = 0; col < cells[row].length; col++) {
-                cells[row][col] = new Cell();
-            }
-        }
-        Arrays.stream(OrganismTypes.values()).forEach(e -> {
+        IntStream.range(0, cells.length)
+                .parallel()
+                .forEach(row -> Arrays.setAll(cells[row], col -> new Cell(organismFactory.getOrganismNamesMap())));
+
+
+        Arrays.stream(OrganismTypes.values()).forEach(organismTypes -> {
             cells[Randomizer.getZeroToBound(rows)][Randomizer.getZeroToBound(cols)]
                     .getResidents()
-                    .put(String.valueOf(e), Stream.generate(() -> organismFactory.getNewOrganism(e))
-                            .limit(Settings.START.getValue())
-                            .collect(Collectors.toSet()));
+                    .get(organismTypes.getName())
+                    .addAll(Stream.generate(() -> organismFactory.getNewOrganism(organismTypes))
+                            .limit(startingQuantity).collect(Collectors.toSet()));
+
         });
-        Arrays.stream(OrganismTypes.values()).forEach(types -> {
-            Stream.generate(() -> organismFactory.getNewOrganism(types))
-                    .limit(Settings.valueOf("COUNT_OF_" + types.getName().toUpperCase()).getValue())
-                    .forEach(o -> {
-                        cells[Randomizer.getZeroToBound(rows)][Randomizer.getZeroToBound(cols)]
+
+        Arrays.stream(OrganismTypes.values()).forEach(organismTypes -> {
+            Stream.generate(() -> organismFactory.getNewOrganism(organismTypes))
+                    .limit(Settings.valueOf("COUNT_OF_" + organismTypes.getName().toUpperCase())
+                            .getValue() - startingQuantity)
+                    .forEach(organism -> {
+                        Cell[] arr = Arrays.stream(cells)
+                                .flatMap(Arrays::stream)
+                                .filter(cell -> cell.getResidents()
+                                        .get(organismTypes.getName()).size() < organism.getLimit().getMaxCount())
+                                .toArray(Cell[]::new);
+                        arr[Randomizer.getZeroToBound(arr.length)]
                                 .getResidents()
-                                .computeIfAbsent(types.getName(), s -> new HashSet<>())
-                                .addAll(Stream.of(o).collect(Collectors.toSet()));
+                                .get(organismTypes.getName())
+                                .add(organism);
                     });
         });
+
         return gameMap;
     }
 }
