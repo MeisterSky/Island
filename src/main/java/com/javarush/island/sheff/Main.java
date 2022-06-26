@@ -14,7 +14,7 @@ public class Main {
 
         OrganismFactory organismFactory = OrganismFactorySingleton.INSTANCE;
         GameMapCreator gameMapCreator = new GameMapCreator(organismFactory);
-        GameMap gameMap = gameMapCreator.createRandomStartedGameMap();
+        GameMap gameMap = gameMapCreator.createRandomStartGameMap();
 
         System.out.println("Линий: " + gameMap.getCells().length);
         int counterRows = -1;

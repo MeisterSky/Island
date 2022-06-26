@@ -1,6 +1,7 @@
 package com.javarush.island.sheff.repository;
 
 import com.google.common.collect.ImmutableMap;
+import com.javarush.island.sheff.entities.organisms.Limit;
 import com.javarush.island.sheff.entities.organisms.Organism;
 import com.javarush.island.sheff.util.JsonParser;
 import lombok.Getter;
@@ -43,6 +44,10 @@ public enum OrganismFactorySingleton implements OrganismFactory {
 
     public Organism getNewOrganism(OrganismTypes organismType) {
         return Objects.requireNonNull(organismMap.get(organismType.getName())).copy();
+    }
+
+    public Limit getPrototypeOrganismLimit(OrganismTypes organismType) {
+        return Objects.requireNonNull(organismMap.get(organismType.getName())).getLimit();
     }
 
     public Map<String, HashSet<Organism>> getOrganismNamesMap() {

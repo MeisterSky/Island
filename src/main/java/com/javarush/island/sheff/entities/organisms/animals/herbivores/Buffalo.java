@@ -12,7 +12,7 @@ public class Buffalo extends Herbivore {
     private static int ids;
 
     public Buffalo(int id, String name, String color, double weight, int[] offspring, Limit limit) {
-        super(id, name, color, weight, offspring, limit);
+        super(++id, name, color, weight, offspring, limit);
     }
 
     public Buffalo(Buffalo prototype) {

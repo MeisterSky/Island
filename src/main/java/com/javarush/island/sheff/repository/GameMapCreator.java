@@ -11,12 +11,7 @@ import java.util.stream.Stream;
 
 public record GameMapCreator(OrganismFactory organismFactory) {
 
-    public GameMap getEmptyGameMap(int rows, int cols) {
-
-        return new GameMap(rows, cols);
-    }
-
-    public GameMap createRandomStartedGameMap() {
+    public GameMap createRandomStartGameMap() {
         int rows = Settings.ROWS.getValue();
         int cols = Settings.COLS.getValue();
         int startingQuantity = Settings.START.getValue();
@@ -29,18 +24,17 @@ public record GameMapCreator(OrganismFactory organismFactory) {
 
 
         Arrays.stream(OrganismTypes.values()).forEach(organismTypes -> {
+
             cells[Randomizer.getZeroToBound(rows)][Randomizer.getZeroToBound(cols)]
                     .getResidents()
                     .get(organismTypes.getName())
                     .addAll(Stream.generate(() -> organismFactory.getNewOrganism(organismTypes))
-                            .limit(startingQuantity).collect(Collectors.toSet()));
+                            .limit(Integer.min(startingQuantity, organismFactory.getPrototypeOrganismLimit(organismTypes).getMaxCount()))
+                            .collect(Collectors.toSet()));
 
-        });
-
-        Arrays.stream(OrganismTypes.values()).forEach(organismTypes -> {
             Stream.generate(() -> organismFactory.getNewOrganism(organismTypes))
                     .limit(Settings.valueOf("COUNT_OF_" + organismTypes.getName().toUpperCase())
-                            .getValue() - startingQuantity)
+                            .getValue() - Integer.min(startingQuantity, organismFactory.getPrototypeOrganismLimit(organismTypes).getMaxCount()))
                     .forEach(organism -> {
                         Cell[] arr = Arrays.stream(cells)
                                 .flatMap(Arrays::stream)
