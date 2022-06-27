@@ -1,6 +1,7 @@
 package com.javarush.island.sheff.entities.organisms.animals.herbivores;
 
 import com.javarush.island.sheff.entities.organisms.Limit;
+import com.javarush.island.sheff.util.Randomizer;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,12 +12,13 @@ public class Buffalo extends Herbivore {
 
     private static int ids;
 
-    public Buffalo(int id, String name, String color, double weight, int[] offspring, Limit limit) {
-        super(++id, name, color, weight, offspring, limit);
+    public Buffalo(int id, int steps, String name, String color, double weight, int[] offspring, boolean femaleGender, boolean canBreed, boolean dead, Limit limit) {
+        super(++id, steps, name, color, weight, offspring, femaleGender, canBreed, dead, limit);
+        this.femaleGender = Randomizer.getChance(limit.getFemaleGenderChance());
     }
 
-    public Buffalo(Buffalo prototype) {
-        this(ids++, prototype.getName(), prototype.getColor(), prototype.getWeight(), prototype.getOffspring(), prototype.getLimit());
+    private Buffalo(Buffalo other) {
+        this(ids++, 0, other.getName(), other.getColor(), 0.0, other.getOffspring(), false, false, false, other.getLimit());
     }
 
 

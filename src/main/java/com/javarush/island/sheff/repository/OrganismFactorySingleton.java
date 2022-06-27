@@ -9,6 +9,8 @@ import lombok.Getter;
 import java.nio.file.Path;
 import java.util.*;
 
+import static com.javarush.island.sheff.repository.OrganismTypes.*;
+
 @Getter
 public enum OrganismFactorySingleton implements OrganismFactory {
     INSTANCE;
@@ -23,22 +25,22 @@ public enum OrganismFactorySingleton implements OrganismFactory {
         gsonParser = new JsonParser(Path.of(PATH).toFile());
 
         organismMap = ImmutableMap.<String, Organism>builder()
-                .put(OrganismTypes.BEAR.getName(), gsonParser.getObject(OrganismTypes.BEAR))
-                .put(OrganismTypes.BOA.getName(), gsonParser.getObject(OrganismTypes.BOA))
-                .put(OrganismTypes.BOAR.getName(), gsonParser.getObject(OrganismTypes.BOAR))
-                .put(OrganismTypes.BUFFALO.getName(), gsonParser.getObject(OrganismTypes.BUFFALO))
-                .put(OrganismTypes.CATERPILLAR.getName(), gsonParser.getObject(OrganismTypes.CATERPILLAR))
-                .put(OrganismTypes.DEER.getName(), gsonParser.getObject(OrganismTypes.DEER))
-                .put(OrganismTypes.DUCK.getName(), gsonParser.getObject(OrganismTypes.DUCK))
-                .put(OrganismTypes.EAGLE.getName(), gsonParser.getObject(OrganismTypes.EAGLE))
-                .put(OrganismTypes.FOX.getName(), gsonParser.getObject(OrganismTypes.FOX))
-                .put(OrganismTypes.GOAT.getName(), gsonParser.getObject(OrganismTypes.GOAT))
-                .put(OrganismTypes.HORSE.getName(), gsonParser.getObject(OrganismTypes.HORSE))
-                .put(OrganismTypes.MOUSE.getName(), gsonParser.getObject(OrganismTypes.MOUSE))
-                .put(OrganismTypes.PLANT.getName(), gsonParser.getObject(OrganismTypes.PLANT))
-                .put(OrganismTypes.RABBIT.getName(), gsonParser.getObject(OrganismTypes.RABBIT))
-                .put(OrganismTypes.SHEEP.getName(), gsonParser.getObject(OrganismTypes.SHEEP))
-                .put(OrganismTypes.WOLF.getName(), gsonParser.getObject(OrganismTypes.WOLF))
+                .put(BEAR.getName(), gsonParser.getObject(BEAR))
+                .put(BOA.getName(), gsonParser.getObject(BOA))
+                .put(BOAR.getName(), gsonParser.getObject(BOAR))
+                .put(BUFFALO.getName(), gsonParser.getObject(BUFFALO))
+                .put(CATERPILLAR.getName(), gsonParser.getObject(CATERPILLAR))
+                .put(DEER.getName(), gsonParser.getObject(DEER))
+                .put(DUCK.getName(), gsonParser.getObject(DUCK))
+                .put(EAGLE.getName(), gsonParser.getObject(EAGLE))
+                .put(FOX.getName(), gsonParser.getObject(FOX))
+                .put(GOAT.getName(), gsonParser.getObject(GOAT))
+                .put(HORSE.getName(), gsonParser.getObject(HORSE))
+                .put(MOUSE.getName(), gsonParser.getObject(MOUSE))
+                .put(PLANT.getName(), gsonParser.getObject(PLANT))
+                .put(RABBIT.getName(), gsonParser.getObject(RABBIT))
+                .put(SHEEP.getName(), gsonParser.getObject(SHEEP))
+                .put(WOLF.getName(), gsonParser.getObject(WOLF))
                 .build();
     }
 
