@@ -6,6 +6,7 @@ import com.javarush.island.sheff.entities.organisms.Limit;
 import com.javarush.island.sheff.entities.organisms.Organism;
 import com.javarush.island.sheff.entities.organisms.animals.Animal;
 import com.javarush.island.sheff.entities.organisms.animals.predators.Bear;
+import com.javarush.island.sheff.entities.organisms.plants.Plant;
 import com.javarush.island.sheff.repository.GameMapCreator;
 import com.javarush.island.sheff.repository.OrganismFactory;
 import com.javarush.island.sheff.repository.OrganismFactorySingleton;
@@ -70,46 +71,5 @@ public class OrganismTest {
     @Test
     void animalEatTest() {
 
-        Organism testBear = organismFactory.getNewOrganism(BEAR);
-        testBear.setWeight(500);
-        Organism testBoa1 = organismFactory.getNewOrganism(BOA);
-        testBoa1.setWeight(10);
-        Organism testBoa2 = organismFactory.getNewOrganism(BOA);
-        testBoa2.setWeight(10);
-        Organism testGoat = organismFactory.getNewOrganism(BOA);
-        testGoat.setWeight(10);
-        Organism testWolf = organismFactory.getNewOrganism(WOLF);
-        testWolf.setWeight(50);
-
-        Map<String, HashSet<Organism>> organisms = Map.ofEntries(
-                entry ("Bear", new HashSet<>(List.of(testBear))),
-                entry ("Boa", new HashSet<>(List.of(testBoa1, testBoa2))),
-                entry ("Goat", new HashSet<>(List.of(testGoat))),
-                entry ("Wolf", new HashSet<>(List.of(testWolf))));
-
-        currentCell.setResidents(organisms);
-
-        Animal hungryBear = (Animal) bear;
-
-        int[] offspring = {0, 0};
-        Map<String, Integer> ration = Map.ofEntries(
-                entry("Boa", 100),
-                entry("Goat", 100));
-
-        Limit limitOfHungryBear = new Limit(500, 80, 5, 2, 0, offspring, ration);
-
-        hungryBear.setLimit(limitOfHungryBear);
-        hungryBear.setWeight(400);
-        Map<String, HashSet<Organism>> result = hungryBear.eat(currentCell);
-
-        assertEquals(4, result.size());
-        assertTrue(result.get("Bear").stream().findFirst().isPresent(), "testBear is missing");
-        assertTrue(result.get("Boa").stream().findFirst().isPresent(), "testBoa is missing");
-        assertTrue(result.get("Goat").stream().findFirst().isPresent(), "testGoat is missing");
-        assertTrue(result.get("Wolf").stream().findFirst().isPresent(), "testWolf is missing");
-        assertEquals(500, result.get("Bear").stream().findFirst().get().getWeight(), "Changed weight of testBear, but should not have");
-        assertEquals(0, result.get("Boa").stream().findFirst().get().getWeight(), "The weight of testBoa has not changed, but it should have");
-        assertEquals(0, result.get("Goat").stream().findFirst().get().getWeight(), "The weight of testGoat has not changed, but it should have");
-        assertEquals(50, result.get("Wolf").stream().findFirst().get().getWeight(), "Changed weight of testWolf, but should not have");
     }
 }
