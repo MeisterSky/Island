@@ -2,24 +2,29 @@ package com.javarush.island.sheff.services;
 
 import com.javarush.island.sheff.entities.abstraction.behavior.Moving;
 import com.javarush.island.sheff.entities.map.Cell;
-import com.javarush.island.sheff.entities.map.GameMap;
 
 import java.util.Arrays;
 import java.util.Collection;
 
-public class WorkerMovingAnimals {
+public class TransferAnimalsTask implements Task {
 
-    GameMap gameMap;
+    Cell[] cells;
 
-    public void movingAnimals(Cell[] cells, GameMap gameMap) {
-        this.gameMap = gameMap;
+    public TransferAnimalsTask(Cell[] cells) {
+        this.cells = cells;
+    }
+
+    @Override
+    public void run() {
         Arrays.stream(cells).forEach(cell -> {
             cell.getResidents()
                     .values()
                     .stream()
                     .flatMap(Collection::stream)
                     .filter(organisms -> organisms instanceof Moving && organisms.getSteps() > 0)
-                    .forEach(organisms -> ((Moving) organisms).move(cell.getAdjacentCells()));
+                    .forEach(organisms -> ((Moving) organisms).selectOfDirection(cell.getAdjacentCells()));
         });
+
+        System.out.println("Переместились");
     }
 }

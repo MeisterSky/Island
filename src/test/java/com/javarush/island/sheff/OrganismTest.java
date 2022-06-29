@@ -91,8 +91,5 @@ public class OrganismTest {
 
         Animal bear = (Animal) organismFactory.getNewOrganism(BEAR);
 
-            filtered = bear.filterByRation(organisms);
-            System.out.println(filtered);
-
     }
 }

@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface Moving {
 
-    void move(List<Cell> cells);
+    void selectOfDirection(List<Cell> cells);
 }

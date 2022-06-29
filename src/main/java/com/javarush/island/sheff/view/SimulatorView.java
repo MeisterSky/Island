@@ -56,4 +56,8 @@ public class SimulatorView extends JFrame {
             setVisible(true);
         });
     }
+
+    public void update() {
+
+    }
 }

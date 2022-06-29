@@ -21,22 +21,23 @@ public abstract class Animal extends Organism implements Eating, Moving {
     }
 
     @Override
-    public Set<Organism> spawn() {
-        canBreed = false;
-        int random = Randomizer.getFromArrayInt(getLimit().getOffspring());
-        this.weight = weight / (random + 1);
-        return Stream.generate(this::copy)
-                .limit(random - 1)
-                .collect(Collectors.toSet());
-    }
-
-    @Override
     public void eat(int food) {
         weight += food;
     }
 
     @Override
-    public void move(List<Cell> cells) {
+    public Set<Organism> spawn() {
+        canBreed = false;
+        int random = Randomizer.getFromArrayInt(getLimit().getOffspring());
+        this.weight = weight / (random + 1);
+        return Stream.generate(this::copy)
+                .limit(random)
+                .collect(Collectors.toSet());
+    }
+
+    @Override
+    public void selectOfDirection(List<Cell> cells) {
+        steps--;
         cells.stream()
                 .map(Cell::getResidents)
                 .map(this::filterByRation)
@@ -46,16 +47,16 @@ public abstract class Animal extends Organism implements Eating, Moving {
                 .flatMap(Collection::stream)
                 .flatMap(HashSet::stream)
                 .findFirst().ifPresent(organism -> {
-                    System.out.println("Передвижение организма: " + this);
-                    System.out.println("Старая локация: " + location);
+//                    System.out.println("Передвижение организма: " + this);
+//                    System.out.println("Старая локация: " + location);
                     location.setLocation(organism.getLocation());
-                    System.out.println("Новая локация: " + location);
-                    System.out.println("Походило организмов: " + ++counter);
+//                    System.out.println("Новая локация: " + location);
+//                    System.out.println("Походило организмов: " + ++counter);
                 });
 
     }
 
-    public int compareWeight(Map<String, HashSet<Organism>> map1, Map<String, HashSet<Organism>> map2) {
+    private int compareWeight(Map<String, HashSet<Organism>> map1, Map<String, HashSet<Organism>> map2) {
         Double map1Weight = map1.values().stream()
                 .flatMap(Set::stream)
                 .map(Organism::getWeight)
@@ -70,7 +71,7 @@ public abstract class Animal extends Organism implements Eating, Moving {
         return map1Weight.compareTo(map2Weight);
     }
 
-    public Map<String, HashSet<Organism>> filterByRation(Map<String, HashSet<Organism>> map) {
+    private Map<String, HashSet<Organism>> filterByRation(Map<String, HashSet<Organism>> map) {
         return map.entrySet()
                 .stream()
                 .filter(entry -> limit.getRation().containsKey(entry.getKey()))

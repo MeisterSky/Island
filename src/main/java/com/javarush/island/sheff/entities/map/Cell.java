@@ -5,6 +5,7 @@ import com.javarush.island.sheff.repository.OrganismTypes;
 import lombok.Getter;
 
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
 @Getter
@@ -13,10 +14,10 @@ public class Cell {
     private final int row;
     private final int col;
 
-    private final Map<String, HashSet<Organism>> residents;
+    private final ConcurrentHashMap<String, HashSet<Organism>> residents;
     private final List<Cell> adjacentCells = new ArrayList<>();
 
-    public Cell(int row, int col, Map<String, HashSet<Organism>> residents) {
+    public Cell(int row, int col, ConcurrentHashMap<String, HashSet<Organism>> residents) {
         this.row = row;
         this.col = col;
         this.residents = residents;
@@ -28,6 +29,10 @@ public class Cell {
         if (col > 0) adjacentCells.add(cells[row][col - 1]);
         if (row < map.getRows() - 1) adjacentCells.add(cells[row + 1][col]);
         if (col < map.getCols() - 1) adjacentCells.add(cells[row][col + 1]);
+    }
+
+    public void updateResidents(ConcurrentHashMap<String, HashSet<Organism>> newOrganismNamesMap) {
+
     }
 
     @Override

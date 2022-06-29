@@ -1,9 +1,9 @@
 package com.javarush.island.sheff;
 
-import com.javarush.island.sheff.entities.abstraction.behavior.Moving;
+import com.javarush.island.sheff.entities.map.Cell;
 import com.javarush.island.sheff.entities.map.GameMap;
 import com.javarush.island.sheff.repository.*;
-import com.javarush.island.sheff.services.WorkerMovingAnimals;
+import com.javarush.island.sheff.services.CallSelectOfDirectionTask;
 import com.javarush.island.sheff.view.SimulatorView;
 
 import java.util.*;
@@ -61,22 +61,26 @@ public class Main {
 //
 //        }
 
-        WorkerMovingAnimals workerMovingAnimals = new WorkerMovingAnimals();
-        Arrays.stream(gameMap.getCells())
-                .flatMap(Arrays::stream)
-                .forEach(cell -> {
-                    cell.getResidents()
-                            .values()
-                            .stream()
-                            .flatMap(Collection::stream)
-                            .forEach(organism -> {
-                                if (organism instanceof Moving && organism.getSteps() > 0) {
-                                    ((Moving) organism).move(cell.getAdjacentCells());
-                                }
-                            });
-                });
+        CallSelectOfDirectionTask callSelectOfDirectionTask = new CallSelectOfDirectionTask((Arrays.stream(gameMap.getCells())
+                .flatMap(Arrays::stream).toArray(Cell[]::new)));
+        callSelectOfDirectionTask.run();
 
-        System.out.println("Всего организмов: " + gameMap.getAll().size());
+
+//        Arrays.stream(gameMap.getCells())
+//                .flatMap(Arrays::stream)
+//                .forEach(cell -> {
+//                    cell.getResidents()
+//                            .values()
+//                            .stream()
+//                            .flatMap(Collection::stream)
+//                            .forEach(organism -> {
+//                                if (organism instanceof Moving && organism.getSteps() > 0) {
+//                                    ((Moving) organism).move(cell.getAdjacentCells());
+//                                }
+//                            });
+//                });
+
+        System.out.println("Всего организмов: " + gameMap.getAllOrganisms().size());
 
         SimulatorView simulatorView = new SimulatorView();
         simulatorView.getView(gameMap);
