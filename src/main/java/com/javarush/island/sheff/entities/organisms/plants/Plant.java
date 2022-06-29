@@ -29,7 +29,7 @@ public class Plant extends Organism implements Breeding {
         }
         canBreed = false;
         return Stream.generate(this::copy)
-                .limit(getLimit().getMaxCount())
+                .limit(getLimit().getMaxCount() - 1)
                 .collect(Collectors.toSet());
     }
 

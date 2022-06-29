@@ -18,30 +18,29 @@ public enum OrganismFactorySingleton implements OrganismFactory {
     private static final String PATH = "src/main/resources/organisms.json";
 
     private final JsonParser gsonParser;
-    private final ImmutableMap<String, Organism> organismMap;
+    private final Map<String, Organism> organismMap;
 
     OrganismFactorySingleton() {
 
         gsonParser = new JsonParser(Path.of(PATH).toFile());
 
-        organismMap = ImmutableMap.<String, Organism>builder()
-                .put(BEAR.getName(), gsonParser.getObject(BEAR))
-                .put(BOA.getName(), gsonParser.getObject(BOA))
-                .put(BOAR.getName(), gsonParser.getObject(BOAR))
-                .put(BUFFALO.getName(), gsonParser.getObject(BUFFALO))
-                .put(CATERPILLAR.getName(), gsonParser.getObject(CATERPILLAR))
-                .put(DEER.getName(), gsonParser.getObject(DEER))
-                .put(DUCK.getName(), gsonParser.getObject(DUCK))
-                .put(EAGLE.getName(), gsonParser.getObject(EAGLE))
-                .put(FOX.getName(), gsonParser.getObject(FOX))
-                .put(GOAT.getName(), gsonParser.getObject(GOAT))
-                .put(HORSE.getName(), gsonParser.getObject(HORSE))
-                .put(MOUSE.getName(), gsonParser.getObject(MOUSE))
-                .put(PLANT.getName(), gsonParser.getObject(PLANT))
-                .put(RABBIT.getName(), gsonParser.getObject(RABBIT))
-                .put(SHEEP.getName(), gsonParser.getObject(SHEEP))
-                .put(WOLF.getName(), gsonParser.getObject(WOLF))
-                .build();
+        organismMap = new HashMap<>();
+                organismMap.put(BEAR.getName(), gsonParser.getObject(BEAR));
+                organismMap.put(BOA.getName(), gsonParser.getObject(BOA));
+                organismMap.put(BOAR.getName(), gsonParser.getObject(BOAR));
+                organismMap.put(BUFFALO.getName(), gsonParser.getObject(BUFFALO));
+                organismMap.put(CATERPILLAR.getName(), gsonParser.getObject(CATERPILLAR));
+                organismMap.put(DEER.getName(), gsonParser.getObject(DEER));
+                organismMap.put(DUCK.getName(), gsonParser.getObject(DUCK));
+                organismMap.put(EAGLE.getName(), gsonParser.getObject(EAGLE));
+                organismMap.put(FOX.getName(), gsonParser.getObject(FOX));
+                organismMap.put(GOAT.getName(), gsonParser.getObject(GOAT));
+                organismMap.put(HORSE.getName(), gsonParser.getObject(HORSE));
+                organismMap.put(MOUSE.getName(), gsonParser.getObject(MOUSE));
+                organismMap.put(PLANT.getName(), gsonParser.getObject(PLANT));
+                organismMap.put(RABBIT.getName(), gsonParser.getObject(RABBIT));
+                organismMap.put(SHEEP.getName(), gsonParser.getObject(SHEEP));
+                organismMap.put(WOLF.getName(), gsonParser.getObject(WOLF));
     }
 
     public Organism getNewOrganism(OrganismTypes organismType) {

@@ -20,6 +20,7 @@ public abstract class Organism implements Breeding {
     protected boolean canBreed;
     protected boolean dead;
     protected Limit limit;
+    protected Location location;
 
     public Organism() {
     }
@@ -27,14 +28,15 @@ public abstract class Organism implements Breeding {
     public Organism(Organism other) {
         this();
         id = ++other.id;
-        steps = 0;
+        limit = other.getLimit();
+        steps = limit.getMaxSpeed();
         name = other.getName();
         weight = other.getWeight();
         offspring = other.getOffspring();
         femaleGender = Randomizer.getChance(50);
-        canBreed = false;
+        canBreed = femaleGender;
         dead = false;
-        limit = other.getLimit();
+        location = new Location(other.getLocation());
     }
 
     public abstract Organism copy();
@@ -43,12 +45,12 @@ public abstract class Organism implements Breeding {
 
     public abstract void endTurn();
 
-
     @Override
     public String toString() {
         return this.getClass().getSimpleName() + " №" + id + " {" +
                 "HashCode=" + this.hashCode() +
                 ", steps=" + steps +
+                ", location=" + location +
                 ", name=\"" + name + '\"' +
                 ", weight=" + weight +
                 ", femaleGender=" + femaleGender +

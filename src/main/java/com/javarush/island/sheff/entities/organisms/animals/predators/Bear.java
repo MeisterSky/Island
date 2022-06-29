@@ -13,5 +13,4 @@ public class Bear extends Predator {
     public Bear copy() {
         return new Bear(this);
     }
-
 }

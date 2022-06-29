@@ -1,12 +1,10 @@
 package com.javarush.island.sheff;
 
+import com.javarush.island.sheff.entities.abstraction.behavior.Moving;
 import com.javarush.island.sheff.entities.map.Cell;
 import com.javarush.island.sheff.entities.map.GameMap;
-import com.javarush.island.sheff.entities.organisms.Limit;
 import com.javarush.island.sheff.entities.organisms.Organism;
 import com.javarush.island.sheff.entities.organisms.animals.Animal;
-import com.javarush.island.sheff.entities.organisms.animals.predators.Bear;
-import com.javarush.island.sheff.entities.organisms.plants.Plant;
 import com.javarush.island.sheff.repository.GameMapCreator;
 import com.javarush.island.sheff.repository.OrganismFactory;
 import com.javarush.island.sheff.repository.OrganismFactorySingleton;
@@ -69,7 +67,32 @@ public class OrganismTest {
     }
 
     @Test
-    void animalEatTest() {
+    void animalMoveTest() {
+
+        Map<String, HashSet<Organism>> filtered = new HashMap<>();
+
+        Map<String, HashSet<Organism>> organisms = Map.ofEntries(
+                entry ("Bear", new HashSet<>(List.of(organismFactory.getNewOrganism(BEAR)))),
+                entry ("Boa", new HashSet<>(List.of(organismFactory.getNewOrganism(BOA)))),
+                entry ("Boar", new HashSet<>(List.of(organismFactory.getNewOrganism(BOAR)))),
+                entry ("Buffalo", new HashSet<>(List.of(organismFactory.getNewOrganism(BUFFALO)))),
+                entry ("Caterpillar", new HashSet<>(List.of(organismFactory.getNewOrganism(CATERPILLAR)))),
+                entry ("Deer", new HashSet<>(List.of(organismFactory.getNewOrganism(DEER)))),
+                entry ("Duck", new HashSet<>(List.of(organismFactory.getNewOrganism(DUCK)))),
+                entry ("Eagle", new HashSet<>(List.of(organismFactory.getNewOrganism(EAGLE)))),
+                entry ("Fox", new HashSet<>(List.of(organismFactory.getNewOrganism(FOX)))),
+                entry ("Goat", new HashSet<>(List.of(organismFactory.getNewOrganism(GOAT)))),
+                entry ("Horse", new HashSet<>(List.of(organismFactory.getNewOrganism(HORSE)))),
+                entry ("Mouse", new HashSet<>(List.of(organismFactory.getNewOrganism(MOUSE)))),
+                entry ("Plant", new HashSet<>(List.of(organismFactory.getNewOrganism(PLANT)))),
+                entry ("Rabbit", new HashSet<>(List.of(organismFactory.getNewOrganism(RABBIT)))),
+                entry ("Sheep", new HashSet<>(List.of(organismFactory.getNewOrganism(SHEEP)))),
+                entry ("Wolf", new HashSet<>(List.of(organismFactory.getNewOrganism(WOLF)))));
+
+        Animal bear = (Animal) organismFactory.getNewOrganism(BEAR);
+
+            filtered = bear.filterByRation(organisms);
+            System.out.println(filtered);
 
     }
 }
