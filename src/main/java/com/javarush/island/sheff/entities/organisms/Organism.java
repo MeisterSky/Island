@@ -15,7 +15,6 @@ public abstract class Organism implements Breeding {
     protected int steps;
     protected String name;
     protected double weight;
-    protected int[] offspring;
     protected boolean femaleGender;
     protected boolean canBreed;
     protected boolean dead;
@@ -32,7 +31,6 @@ public abstract class Organism implements Breeding {
         steps = limit.getMaxSpeed();
         name = other.getName();
         weight = other.getWeight();
-        offspring = other.getOffspring();
         femaleGender = Randomizer.getChance(50);
         canBreed = femaleGender;
         dead = false;

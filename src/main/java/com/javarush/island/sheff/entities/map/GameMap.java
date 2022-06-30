@@ -2,6 +2,7 @@ package com.javarush.island.sheff.entities.map;
 
 import com.javarush.island.sheff.entities.organisms.Organism;
 import com.javarush.island.sheff.repository.OrganismFactory;
+import com.javarush.island.sheff.repository.OrganismTypes;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -9,6 +10,7 @@ import java.util.stream.Collectors;
 public class GameMap {
     private final Cell[][] cells;
     private int rows, cols;
+    private int transferCount;
 
     public GameMap(int rows, int cols) {
         this.rows = rows;
@@ -27,6 +29,10 @@ public class GameMap {
                 cells[row][col].updateNextCell(this, row, col);
             }
         }
+        transferCount = getAllOrganisms()
+                .stream()
+                .max((o1, o2) -> Math.max(o1.getLimit().getMaxSpeed(), o2.getLimit().getMaxSpeed()))
+                .orElse(organismFactory.getNewOrganism(OrganismTypes.HORSE)).getLimit().getMaxSpeed();
     }
 
     public void updateCells(OrganismFactory organismFactory) {
@@ -37,6 +43,9 @@ public class GameMap {
         }
     }
 
+    public int getTransferCount() {
+        return transferCount;
+    }
 
     public Cell[][] getCells() {
         return cells;

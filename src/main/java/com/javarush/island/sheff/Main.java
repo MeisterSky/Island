@@ -10,11 +10,13 @@ import java.util.*;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
 
         OrganismFactory organismFactory = OrganismFactorySingleton.INSTANCE;
         GameMapCreator gameMapCreator = new GameMapCreator(organismFactory);
         GameMap gameMap = gameMapCreator.createRandomStartGameMapFromSettings();
+        SimulatorView simulatorView = new SimulatorView();
+        simulatorView.startView(gameMap);
 
 //        for (Cell[] row : gameMap.getCells()) {
 //            for (Cell cells : row) {
@@ -63,7 +65,7 @@ public class Main {
 
         CallSelectOfDirectionTask callSelectOfDirectionTask = new CallSelectOfDirectionTask((Arrays.stream(gameMap.getCells())
                 .flatMap(Arrays::stream).toArray(Cell[]::new)));
-        callSelectOfDirectionTask.run();
+        callSelectOfDirectionTask.call();
 
 
 //        Arrays.stream(gameMap.getCells())
@@ -81,9 +83,8 @@ public class Main {
 //                });
 
         System.out.println("Всего организмов: " + gameMap.getAllOrganisms().size());
-
-        SimulatorView simulatorView = new SimulatorView();
-        simulatorView.getView(gameMap);
+        Thread.sleep(5000);
+        simulatorView.updateView(1);
         System.out.println(gameMap.getCells()[0][0].toString());
 
     }

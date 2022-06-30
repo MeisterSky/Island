@@ -11,7 +11,10 @@ public class CallEndTurnTask implements Task {
     }
 
     @Override
-    public void run() {
+    public Long call() {
+
         System.out.println("Конец хода");
+
+        return Thread.currentThread().getId();
     }
 }

@@ -1,7 +1,9 @@
 package com.javarush.island.sheff.services;
 
-public interface Task extends Runnable {
+import java.util.concurrent.Callable;
+
+public interface Task extends Callable<Long> {
 
     @Override
-    void run();
+    Long call();
 }

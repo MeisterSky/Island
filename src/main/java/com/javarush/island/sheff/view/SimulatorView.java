@@ -10,54 +10,68 @@ public class SimulatorView extends JFrame {
 
     private JLabel stepLabel, population;
     private final String STEP_PREFIX = "Days: ";
+    public int day;
     private final String POPULATION_PREFIX = "Population: ";
+    Cell[][] cells;
+    int rows;
+    int cols;
+    JPanel panel;
+    JTextArea[][] fields;
+    JPanel infoPane;
+    Container contents;
 
-    public void getView(GameMap gameMap) {
-        Cell[][] cells = gameMap.getCells();
-        int rows = cells.length;
-        int cols = cells[0].length;
+    public void startView(GameMap gameMap) {
+        cells = gameMap.getCells();
+        rows = cells.length;
+        cols = cells[0].length;
 
+        setTitle("Island Simulation");
+
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocation(rows, cols);
+        contents = getContentPane();
+        updateView(day);
+        setLocationRelativeTo(null);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
+        setVisible(true);
+    }
+
+    public void updateView(int day) {
+
+        contents.removeAll();
 
         EventQueue.invokeLater(() -> {
-
-            setTitle("Island Simulation");
-            stepLabel = new JLabel(STEP_PREFIX, JLabel.CENTER);
+            stepLabel = new JLabel(STEP_PREFIX + day, JLabel.CENTER);
             population = new JLabel(POPULATION_PREFIX, JLabel.CENTER);
+            infoPane = new JPanel(new BorderLayout());
 
-            setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-            setLocation(rows, cols);
-
-            JPanel infoPane = new JPanel(new BorderLayout());
             infoPane.add(stepLabel, BorderLayout.WEST);
             infoPane.add(population, BorderLayout.CENTER);
 
-            JTextArea[][] fields = new JTextArea[rows][cols];
+            fields = new JTextArea[rows][cols];
+            panel = new JPanel(new GridLayout(rows, cols));
 
-            JPanel panel = new JPanel(new GridLayout(rows, cols));
-            for (int i = 0; i < rows; i++) {
-                for (int j = 0; j < cols; j++) {
-                    fields[i][j] = new JTextArea();
-                    fields[i][j].setLineWrap(true);
-                    fields[i][j].setWrapStyleWord(false);
-                    fields[i][j].setFont(fields[i][j].getFont().deriveFont(9f));
-                    fields[i][j].setText(cells[i][j].toString());
-                    fields[i][j].revalidate();
-                    panel.add(fields[i][j]);
+            for (int row = 0; row < rows; row++) {
+                for (int col = 0; col < cols; col++) {
+                    fields[row][col] = new JTextArea();
+                    fields[row][col].setLineWrap(true);
+                    fields[row][col].setWrapStyleWord(false);
+                    fields[row][col].setFont(fields[row][col].getFont().deriveFont(9f));
+                    fields[row][col].setText(cells[row][col].toString());
+                    fields[row][col].revalidate();
+                    panel.add(fields[row][col]);
+                    panel.revalidate();
                 }
             }
 
-            Container contents = getContentPane();
+            infoPane.revalidate();
             contents.add(infoPane, BorderLayout.NORTH);
-
+            contents.revalidate();
             add(panel);
             pack();
-            setLocationRelativeTo(null);
             setVisible(true);
+            invalidate();
         });
-    }
-
-    public void update() {
-
     }
 }

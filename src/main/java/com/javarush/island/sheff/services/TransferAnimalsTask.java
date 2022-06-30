@@ -15,16 +15,15 @@ public class TransferAnimalsTask implements Task {
     }
 
     @Override
-    public void run() {
-        Arrays.stream(cells).forEach(cell -> {
-            cell.getResidents()
-                    .values()
-                    .stream()
-                    .flatMap(Collection::stream)
-                    .filter(organisms -> organisms instanceof Moving && organisms.getSteps() > 0)
-                    .forEach(organisms -> ((Moving) organisms).selectOfDirection(cell.getAdjacentCells()));
-        });
+    public Long call() {
+        Arrays.stream(cells).forEach(cell -> cell.getResidents()
+                .values()
+                .stream()
+                .flatMap(Collection::stream)
+                .filter(organisms -> organisms instanceof Moving && organisms.getSteps() > 0)
+                .forEach(organisms -> ((Moving) organisms).selectOfDirection(cell.getAdjacentCells())));
 
         System.out.println("Переместились");
+        return Thread.currentThread().getId();
     }
 }

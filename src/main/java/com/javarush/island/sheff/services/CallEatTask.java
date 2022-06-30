@@ -11,8 +11,10 @@ public class CallEatTask implements Task {
     }
 
     @Override
-    public void run() {
+    public Long call() {
 
         System.out.println("Поели");
+
+        return Thread.currentThread().getId();
     }
 }
