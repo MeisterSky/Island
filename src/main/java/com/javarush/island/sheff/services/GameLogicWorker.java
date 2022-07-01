@@ -68,17 +68,13 @@ public class GameLogicWorker extends Thread {
             runTasks(callSelectOfDirectionTasks);
 
             organisms = gameMap.getAllOrganismsMap();
-
             transferAnimalsTasks = new ArrayList<>();
             for (int i = 0; i < gameMap.getCells().length; i++) {
                 TransferAnimalsTask transferAnimalsTask = new TransferAnimalsTask(rows.get(i), organisms.get(i));
                 transferAnimalsTasks.add(transferAnimalsTask);
             }
-
             runTasks(transferAnimalsTasks);
-
             gameMap.updateCells();
-
             runTasks(callEndTurnTasks);
             simulatorView.updateView(++day);
         } catch (InterruptedException | ExecutionException e) {
@@ -89,9 +85,9 @@ public class GameLogicWorker extends Thread {
     private void runTasks(List<Task> tasks) throws InterruptedException, ExecutionException {
         executorService = MoreExecutors.listeningDecorator(Executors.newFixedThreadPool(rows.size()));
         List<Future<Long>> futures = executorService.invokeAll(tasks);
-//        for (Future<Long> f : futures) {
-//            System.out.println(f.get());
-//        }
+        for (Future<Long> f : futures) {
+            System.out.println(f.get());
+        }
         executorService.shutdown();
         if (executorService.isShutdown()) {
             System.out.println("FINISH");

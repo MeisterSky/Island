@@ -9,18 +9,19 @@ import javax.swing.*;
 public class SimulatorView extends JFrame {
 
     private JLabel stepLabel, population;
-    private final String STEP_PREFIX = "Days: ";
-    public int day;
+    private final String STEP_PREFIX = "Day: ";
     private final String POPULATION_PREFIX = "Population: ";
-    Cell[][] cells;
-    int rows;
-    int cols;
-    JPanel panel;
-    JTextArea[][] fields;
-    JPanel infoPane;
-    Container contents;
+    private GameMap gameMap;
+    private Cell[][] cells;
+    private int rows;
+    private int cols;
+    private JPanel panel;
+    private JTextArea[][] fields;
+    private JPanel infoPane;
+    private Container contents;
 
     public void startView(GameMap gameMap) {
+        this.gameMap = gameMap;
         cells = gameMap.getCells();
         rows = cells.length;
         cols = cells[0].length;
@@ -28,12 +29,11 @@ public class SimulatorView extends JFrame {
         setTitle("Island Simulation");
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocation(rows, cols);
         contents = getContentPane();
-        updateView(day);
         setLocationRelativeTo(null);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setVisible(true);
+        updateView(0);
     }
 
     public void updateView(int day) {
@@ -42,7 +42,7 @@ public class SimulatorView extends JFrame {
 
         EventQueue.invokeLater(() -> {
             stepLabel = new JLabel(STEP_PREFIX + day, JLabel.CENTER);
-            population = new JLabel(POPULATION_PREFIX, JLabel.CENTER);
+            population = new JLabel(POPULATION_PREFIX + gameMap.toString(), JLabel.CENTER);
             infoPane = new JPanel(new BorderLayout());
 
 
@@ -60,6 +60,8 @@ public class SimulatorView extends JFrame {
                     fields[row][col].setFont(fields[row][col].getFont().deriveFont(9f));
                     fields[row][col].setText(cells[row][col].toString());
                     fields[row][col].revalidate();
+                    fields[row][col].setRows(rows);
+                    fields[row][col].setColumns(cols);
                     panel.add(fields[row][col]);
                     panel.revalidate();
                 }

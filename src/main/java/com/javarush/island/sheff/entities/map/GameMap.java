@@ -102,4 +102,9 @@ public class GameMap {
         }
         return allOrganisms;
     }
+
+    @Override
+    public String toString() {
+        return "000";
+    }
 }

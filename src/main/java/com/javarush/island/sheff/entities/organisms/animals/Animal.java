@@ -14,8 +14,6 @@ import java.util.stream.Stream;
 @Getter
 public abstract class Animal extends Organism implements Eating, Moving {
 
-    private static int counter;
-
     public Animal(Animal other) {
         super(other);
     }
@@ -46,13 +44,7 @@ public abstract class Animal extends Organism implements Eating, Moving {
                 .stream()
                 .flatMap(Collection::stream)
                 .flatMap(HashSet::stream)
-                .findFirst().ifPresent(organism -> {
-//                    System.out.println("Передвижение организма: " + this);
-//                    System.out.println("Старая локация: " + location);
-                    location.setLocation(organism.getLocation());
-//                    System.out.println("Новая локация: " + location);
-//                    System.out.println("Походило организмов: " + ++counter);
-                });
+                .findFirst().ifPresent(organism -> location.setLocation(organism.getLocation()));
 
     }
 
