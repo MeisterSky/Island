@@ -4,6 +4,7 @@ import com.google.common.util.concurrent.ListeningExecutorService;
 import com.google.common.util.concurrent.MoreExecutors;
 import com.javarush.island.sheff.entities.map.Cell;
 import com.javarush.island.sheff.entities.map.GameMap;
+import com.javarush.island.sheff.entities.organisms.Organism;
 import com.javarush.island.sheff.exception.InitGameException;
 import com.javarush.island.sheff.view.SimulatorView;
 
@@ -18,6 +19,7 @@ public class GameLogicWorker extends Thread {
     private final GameMap gameMap;
     private int transferCount;
     private ConcurrentMap<Integer, Cell[]> rows = new ConcurrentHashMap<>();
+    private ConcurrentMap<Integer, HashSet<Organism>> organisms;
     private List<Task> callEatTasks;
     private List<Task> callSpawnTasks;
     private List<Task> callSelectOfDirectionTasks;
@@ -51,11 +53,6 @@ public class GameLogicWorker extends Thread {
             CallSelectOfDirectionTask callSelectOfDirectionTask = new CallSelectOfDirectionTask(rows.get(i));
             callSelectOfDirectionTasks.add(callSelectOfDirectionTask);
         }
-        transferAnimalsTasks = new ArrayList<>();
-        for (int i = 0; i < gameMap.getCells().length; i++) {
-            TransferAnimalsTask transferAnimalsTask = new TransferAnimalsTask(rows.get(i));
-            transferAnimalsTasks.add(transferAnimalsTask);
-        }
         callEndTurnTasks = new ArrayList<>();
         for (int i = 0; i < gameMap.getCells().length; i++) {
             CallEndTurnTask callEndTurnTask = new CallEndTurnTask(rows.get(i));
@@ -69,9 +66,21 @@ public class GameLogicWorker extends Thread {
             runTasks(callEatTasks);
             runTasks(callSpawnTasks);
             runTasks(callSelectOfDirectionTasks);
+
+            organisms = gameMap.getAllOrganismsMap();
+
+            transferAnimalsTasks = new ArrayList<>();
+            for (int i = 0; i < gameMap.getCells().length; i++) {
+                TransferAnimalsTask transferAnimalsTask = new TransferAnimalsTask(rows.get(i), organisms.get(i));
+                transferAnimalsTasks.add(transferAnimalsTask);
+            }
+
             runTasks(transferAnimalsTasks);
+
+            gameMap.updateCells();
+
             runTasks(callEndTurnTasks);
-            simulatorView.updateView(day++);
+            simulatorView.updateView(++day);
         } catch (InterruptedException | ExecutionException e) {
             throw new InitGameException("Problem with multithreading " + e);
         }

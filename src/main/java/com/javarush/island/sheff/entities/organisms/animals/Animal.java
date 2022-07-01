@@ -84,5 +84,6 @@ public abstract class Animal extends Organism implements Eating, Moving {
         steps = limit.getMaxSpeed();
         canBreed = isFemaleGender();
         weight = weight - limit.getMaxFood() / 1.5;
+        dead = weight <= 0;
     }
 }

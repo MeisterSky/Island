@@ -115,8 +115,8 @@
       "maxFood": 0,
       "femaleGenderChance": 50,
       "offspring": [
-        50,
-        70
+        10,
+        15
       ],
       "ration": {
         "Plant": 100

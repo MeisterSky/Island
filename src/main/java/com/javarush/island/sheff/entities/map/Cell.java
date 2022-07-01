@@ -14,13 +14,15 @@ public class Cell {
     private final int row;
     private final int col;
 
-    private final ConcurrentHashMap<String, HashSet<Organism>> residents;
+    private ConcurrentHashMap<String, HashSet<Organism>> residents;
+    private ConcurrentHashMap<String, HashSet<Organism>> newResidents;
     private final List<Cell> adjacentCells = new ArrayList<>();
 
-    public Cell(int row, int col, ConcurrentHashMap<String, HashSet<Organism>> residents) {
+    public Cell(int row, int col, ConcurrentHashMap<String, HashSet<Organism>> residents, ConcurrentHashMap<String, HashSet<Organism>> newResidents) {
         this.row = row;
         this.col = col;
         this.residents = residents;
+        this.newResidents = newResidents;
     }
 
     public void updateNextCell(GameMap map, int row, int col) {
@@ -32,7 +34,8 @@ public class Cell {
     }
 
     public void updateResidents(ConcurrentHashMap<String, HashSet<Organism>> newOrganismNamesMap) {
-
+        residents = newResidents;
+        newResidents = newOrganismNamesMap;
     }
 
     @Override

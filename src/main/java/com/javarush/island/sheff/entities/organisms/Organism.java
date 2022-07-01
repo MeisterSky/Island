@@ -43,6 +43,10 @@ public abstract class Organism implements Breeding {
 
     public abstract void endTurn();
 
+    public int getCol() {
+        return location.getCol();
+    }
+
     @Override
     public String toString() {
         return this.getClass().getSimpleName() + " №" + id + " {" +

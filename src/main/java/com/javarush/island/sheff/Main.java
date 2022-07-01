@@ -82,7 +82,7 @@ public class Main {
 //                            });
 //                });
 
-        System.out.println("Всего организмов: " + gameMap.getAllOrganisms().size());
+        System.out.println("Всего организмов: " + gameMap.getAllOrganismsSet().size());
         Thread.sleep(5000);
         simulatorView.updateView(1);
         System.out.println(gameMap.getCells()[0][0].toString());

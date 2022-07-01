@@ -1,27 +1,29 @@
 package com.javarush.island.sheff.services;
 
-import com.javarush.island.sheff.entities.abstraction.behavior.Moving;
 import com.javarush.island.sheff.entities.map.Cell;
+import com.javarush.island.sheff.entities.organisms.Organism;
 
 import java.util.Arrays;
-import java.util.Collection;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class TransferAnimalsTask implements Task {
 
     Cell[] cells;
+    Set<Organism> organismSet;
 
-    public TransferAnimalsTask(Cell[] cells) {
+    public TransferAnimalsTask(Cell[] cells, Set<Organism> organismSet) {
         this.cells = cells;
+        this.organismSet = organismSet;
     }
 
     @Override
     public Long call() {
-        Arrays.stream(cells).forEach(cell -> cell.getResidents()
-                .values()
-                .stream()
-                .flatMap(Collection::stream)
-                .filter(organisms -> organisms instanceof Moving && organisms.getSteps() > 0)
-                .forEach(organisms -> ((Moving) organisms).selectOfDirection(cell.getAdjacentCells())));
+        Arrays.stream(cells).forEach(cell -> cell.getNewResidents()
+                .forEach((s, organisms) -> organisms.addAll(organismSet
+                        .stream()
+                        .filter(organism -> organism.getName().equals(s) && organism.getLocation().getCol() == cell.getCol())
+                        .collect(Collectors.toSet()))));
 
         System.out.println("Переместились");
         return Thread.currentThread().getId();
