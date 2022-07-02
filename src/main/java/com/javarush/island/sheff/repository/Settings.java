@@ -28,7 +28,7 @@ public enum Settings {
     COUNT_OF_SHEEP,
     COUNT_OF_WOLF;
 
-    private static final String PATH = "/config.properties";
+    private static final String PATH = "/sheff/config.properties";
 
     private static Properties properties;
 

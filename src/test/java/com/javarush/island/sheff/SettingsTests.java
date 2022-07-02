@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class SettingsTests {
 
-    private static final String PATH = "/config.properties";
+    private static final String PATH = "/sheff/config.properties";
     private static Properties properties;
 
     @SneakyThrows

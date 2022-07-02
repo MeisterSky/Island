@@ -15,7 +15,7 @@ import static com.javarush.island.sheff.repository.OrganismTypes.*;
 public enum OrganismFactorySingleton implements OrganismFactory {
     INSTANCE;
 
-    private static final String PATH = "src/main/resources/organisms.json";
+    private static final String PATH = "src/main/resources/sheff/organisms.json";
 
     private final JsonParser gsonParser;
     private final Map<String, Organism> organismMap;
