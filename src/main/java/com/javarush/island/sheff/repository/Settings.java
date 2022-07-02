@@ -10,7 +10,6 @@ public enum Settings {
     COLS,
     DEFAULT,
     DURATION,
-    LEFT,
     START,
     COUNT_OF_BEAR,
     COUNT_OF_BOA,
@@ -40,6 +39,7 @@ public enum Settings {
             properties = new Properties();
             try {
                 properties.load(Settings.class.getResourceAsStream(PATH));
+
             } catch (Exception e) {
                 throw new InitGameException("Unable to load " + PATH + " file from classpath.", e);
             }

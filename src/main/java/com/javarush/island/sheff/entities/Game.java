@@ -19,5 +19,4 @@ public class Game {
     public void startGame() {
         scheduler.start();
     }
-
 }

@@ -29,8 +29,8 @@ public class Cell {
         Cell[][] cells = map.getCells();
         if (row > 0) adjacentCells.add(cells[row - 1][col]);
         if (col > 0) adjacentCells.add(cells[row][col - 1]);
-        if (row < map.getRows() - 1) adjacentCells.add(cells[row + 1][col]);
-        if (col < map.getCols() - 1) adjacentCells.add(cells[row][col + 1]);
+        if (row < map.getRowsLength() - 1) adjacentCells.add(cells[row + 1][col]);
+        if (col < map.getColsLength() - 1) adjacentCells.add(cells[row][col + 1]);
     }
 
     public void updateResidents(ConcurrentHashMap<String, HashSet<Organism>> newOrganismNamesMap) {
@@ -46,6 +46,5 @@ public class Cell {
                 .map((entry) -> OrganismTypes.valueOf(entry.getKey().toUpperCase()).getIcon()
                         + ":" + entry.getValue().size())
                 .collect(Collectors.joining("\n"));
-
     }
 }

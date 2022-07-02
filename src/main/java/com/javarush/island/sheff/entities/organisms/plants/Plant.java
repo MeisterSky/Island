@@ -34,8 +34,13 @@ public class Plant extends Organism implements Breeding {
     }
 
     @Override
+    public boolean isKilled(boolean chance) {
+        return true;
+    }
+
+    @Override
     public void endTurn() {
         canBreed = true;
-        weight = weight <= limit.getMaxWeight() - 10 ? +10 : weight;
+        weight = weight <= limit.getMaxWeight() - 15 ? +15 : weight;
     }
 }

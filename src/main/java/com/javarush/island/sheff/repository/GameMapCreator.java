@@ -19,8 +19,8 @@ public record GameMapCreator(OrganismFactory organismFactory) {
 
     public GameMap createRandomStartGameMap(int rows, int cols, int startingQuantity, boolean isGenerateAdditionalOrganisms) {
 
-        GameMap gameMap = new GameMap(rows, cols);
-        gameMap.initialize(organismFactory);
+        GameMap gameMap = new GameMap(rows, cols, organismFactory);
+        gameMap.initialize();
 
         Cell[][] cells = gameMap.getCells();
 
@@ -55,16 +55,14 @@ public record GameMapCreator(OrganismFactory organismFactory) {
 
         Arrays.stream(cells)
                 .flatMap(Arrays::stream)
-                        .forEach(cell -> {
-                            cell.getResidents()
-                                    .values()
-                                    .stream()
-                                    .flatMap(Collection::stream)
-                                    .forEach(organism -> {
-                                        organism.getLocation().setRow(cell.getRow());
-                                        organism.getLocation().setCol(cell.getCol());
-                                    });
-                        });
+                .forEach(cell -> cell.getResidents()
+                        .values()
+                        .stream()
+                        .flatMap(Collection::stream)
+                        .forEach(organism -> {
+                            organism.getLocation().setRow(cell.getRow());
+                            organism.getLocation().setCol(cell.getCol());
+                        }));
 
         return gameMap;
     }

@@ -1,4 +1,4 @@
-package com.javarush.island.sheff.services;
+package com.javarush.island.sheff.services.tasks;
 
 import com.javarush.island.sheff.entities.map.Cell;
 import com.javarush.island.sheff.entities.organisms.Organism;
@@ -8,16 +8,14 @@ import java.util.Collection;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class CallSpawnTask implements Task {
-
-    Cell[] cells;
+public class CallSpawnTask extends Task {
 
     public CallSpawnTask(Cell[] cells) {
         this.cells = cells;
     }
 
     @Override
-    public Long call() {
+    public Boolean call() {
         Arrays.stream(cells).forEach(cell -> cell.getResidents()
                 .values()
                 .stream()
@@ -36,6 +34,6 @@ public class CallSpawnTask implements Task {
                 }));
         System.out.println("Размножились");
 
-        return Thread.currentThread().getId();
+        return true;
     }
 }

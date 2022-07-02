@@ -2,7 +2,6 @@ package com.javarush.island.sheff.entities.map;
 
 import com.javarush.island.sheff.entities.organisms.Organism;
 import com.javarush.island.sheff.repository.OrganismFactory;
-import com.javarush.island.sheff.repository.OrganismTypes;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
@@ -13,17 +12,16 @@ public class GameMap {
     private final Cell[][] cells;
     private final int rows;
     private final int cols;
-    private int transferCount;
-    private OrganismFactory organismFactory;
+    private final OrganismFactory organismFactory;
 
-    public GameMap(int rows, int cols) {
+    public GameMap(int rows, int cols, OrganismFactory organismFactory) {
         this.rows = rows;
         this.cols = cols;
         this.cells = new Cell[rows][cols];
+        this.organismFactory = organismFactory;
     }
 
-    public void initialize(OrganismFactory organismFactory) {
-        this.organismFactory = organismFactory;
+    public void initialize() {
         for (int row = 0; row < rows; row++) {
             for (int col = 0; col < cols; col++) {
                 cells[row][col] = new Cell(row, col, organismFactory.getNewOrganismNamesMap(), organismFactory.getNewOrganismNamesMap());
@@ -34,11 +32,6 @@ public class GameMap {
                 cells[row][col].updateNextCell(this, row, col);
             }
         }
-        transferCount = getAllOrganismsSet()
-                .stream()
-                .max((o1, o2) -> Math.max(o1.getLimit().getMaxSpeed(), o2.getLimit().getMaxSpeed()))
-                .orElse(organismFactory.getNewOrganism(OrganismTypes.HORSE)).getLimit().getMaxSpeed();
-
     }
 
     public void updateCells() {
@@ -50,18 +43,20 @@ public class GameMap {
     }
 
     public int getTransferCount() {
-        return transferCount;
+        return getAllOrganismsSet()
+                .stream()
+                .collect(Collectors.summarizingInt(value -> value.getLimit().getMaxSpeed())).getMax();
     }
 
     public Cell[][] getCells() {
         return cells;
     }
 
-    public int getRows() {
+    public int getRowsLength() {
         return cells.length;
     }
 
-    public int getCols() {
+    public int getColsLength() {
         return cells[0].length;
     }
 
@@ -81,11 +76,8 @@ public class GameMap {
                         .stream()
                         .flatMap(Collection::stream)
                         .forEach(organism -> allOrganisms.get(organism.getLocation().getRow()).add(organism));
-                System.out.println("Собрана ячейка " + i + ":" + j);
             }
-            System.out.println("Собрана линия " + i);
         }
-        System.out.println("Животные собраны");
         return allOrganisms;
     }
 
@@ -101,10 +93,5 @@ public class GameMap {
             }
         }
         return allOrganisms;
-    }
-
-    @Override
-    public String toString() {
-        return "000";
     }
 }

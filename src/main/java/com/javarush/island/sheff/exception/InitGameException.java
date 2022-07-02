@@ -1,8 +1,6 @@
 package com.javarush.island.sheff.exception;
 
 public class InitGameException extends RuntimeException{
-    public InitGameException() {
-    }
 
     public InitGameException(String message) {
         super(message);
@@ -10,9 +8,5 @@ public class InitGameException extends RuntimeException{
 
     public InitGameException(String message, Throwable cause) {
         super(message, cause);
-    }
-
-    public InitGameException(Throwable cause) {
-        super(cause);
     }
 }

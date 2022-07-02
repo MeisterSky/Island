@@ -8,6 +8,7 @@ import com.javarush.island.sheff.util.Randomizer;
 import lombok.Getter;
 
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -19,8 +20,24 @@ public abstract class Animal extends Organism implements Eating, Moving {
     }
 
     @Override
-    public void eat(int food) {
-        weight += food;
+    public void eat(ConcurrentHashMap<String, HashSet<Organism>> map) {
+        Set<Organism> organisms;
+        organisms = filterByRation(map)
+                .values()
+                .stream()
+                .flatMap(Collection::stream)
+                .collect(Collectors.toSet());
+        for (Organism organism : organisms) {
+            if (getNeedFood() > 0) {
+                if (organism.isKilled(Randomizer.getChance(limit.getRation().get(organism.getName())))) {
+                    if (getNeedFood() <= organism.getWeight()) {
+                        weight += organism.wasEatenBy(getNeedFood());
+                    } else {
+                        weight += organism.wasEatenBy(organism.getWeight());
+                    }
+                }
+            } else break;
+        }
     }
 
     @Override
@@ -35,17 +52,18 @@ public abstract class Animal extends Organism implements Eating, Moving {
 
     @Override
     public void selectOfDirection(List<Cell> cells) {
-        steps--;
-        cells.stream()
-                .map(Cell::getResidents)
-                .map(this::filterByRation)
-                .max(this::compareWeight)
-                .map(Map::values)
-                .stream()
-                .flatMap(Collection::stream)
-                .flatMap(HashSet::stream)
-                .findFirst().ifPresent(organism -> location.setLocation(organism.getLocation()));
-
+        if (steps > 0) {
+            cells.stream()
+                    .map(Cell::getResidents)
+                    .map(this::filterByRation)
+                    .max(this::compareWeight)
+                    .map(Map::values)
+                    .stream()
+                    .flatMap(Collection::stream)
+                    .flatMap(HashSet::stream)
+                    .findFirst().ifPresent(organism -> location.setLocation(organism.getLocation()));
+            steps--;
+        }
     }
 
     private int compareWeight(Map<String, HashSet<Organism>> map1, Map<String, HashSet<Organism>> map2) {
@@ -71,11 +89,17 @@ public abstract class Animal extends Organism implements Eating, Moving {
 
     }
 
+    private double getNeedFood() {
+        return Math.min(
+                limit.getMaxFood(),
+                limit.getMaxWeight() - getWeight());
+    }
+
     @Override
     public void endTurn() {
         steps = limit.getMaxSpeed();
         canBreed = isFemaleGender();
-        weight = weight - limit.getMaxFood() / 1.5;
+        weight = weight - limit.getMaxFood() / 1.5 - 0.001;
         dead = weight <= 0;
     }
 }

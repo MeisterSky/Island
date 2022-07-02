@@ -43,8 +43,13 @@ public abstract class Organism implements Breeding {
 
     public abstract void endTurn();
 
-    public int getCol() {
-        return location.getCol();
+    public double wasEatenBy(double weight) {
+        this.weight = this.weight - weight;
+        return weight;
+    }
+
+    public boolean isKilled(boolean chance) {
+        return isDead() ? isDead() : (dead = chance);
     }
 
     @Override

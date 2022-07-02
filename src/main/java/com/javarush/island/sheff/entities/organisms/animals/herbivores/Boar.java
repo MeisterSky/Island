@@ -1,9 +1,9 @@
-package com.javarush.island.sheff.entities.organisms.animals.predators;
+package com.javarush.island.sheff.entities.organisms.animals.herbivores;
 
 import lombok.Getter;
 
 @Getter
-public class Boar extends Predator{
+public class Boar extends Herbivore {
 
     public Boar(Boar other) {
         super(other);

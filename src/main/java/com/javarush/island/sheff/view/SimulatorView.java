@@ -9,9 +9,6 @@ import javax.swing.*;
 public class SimulatorView extends JFrame {
 
     private JLabel stepLabel, population;
-    private final String STEP_PREFIX = "Day: ";
-    private final String POPULATION_PREFIX = "Population: ";
-    private GameMap gameMap;
     private Cell[][] cells;
     private int rows;
     private int cols;
@@ -20,31 +17,29 @@ public class SimulatorView extends JFrame {
     private JPanel infoPane;
     private Container contents;
 
-    public void startView(GameMap gameMap) {
-        this.gameMap = gameMap;
+    public void startView(GameMap gameMap, String statistics) {
         cells = gameMap.getCells();
-        rows = cells.length;
-        cols = cells[0].length;
+        rows = gameMap.getRowsLength();
+        cols = gameMap.getColsLength();
 
-        setTitle("Island Simulation");
+        setTitle(ViewConstants.TITLE.toString());
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         contents = getContentPane();
         setLocationRelativeTo(null);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setVisible(true);
-        updateView(0);
+        updateView(0, statistics);
     }
 
-    public void updateView(int day) {
+    public void updateView(int day, String statistics) {
 
         contents.removeAll();
 
         EventQueue.invokeLater(() -> {
-            stepLabel = new JLabel(STEP_PREFIX + day, JLabel.CENTER);
-            population = new JLabel(POPULATION_PREFIX + gameMap.toString(), JLabel.CENTER);
+            stepLabel = new JLabel(ViewConstants.STEP_PREFIX.toString() + day, JLabel.CENTER);
+            population = new JLabel(ViewConstants.POPULATION_PREFIX + statistics, JLabel.CENTER);
             infoPane = new JPanel(new BorderLayout());
-
 
             infoPane.add(stepLabel, BorderLayout.WEST);
             infoPane.add(population, BorderLayout.CENTER);
@@ -59,21 +54,29 @@ public class SimulatorView extends JFrame {
                     fields[row][col].setWrapStyleWord(false);
                     fields[row][col].setFont(fields[row][col].getFont().deriveFont(9f));
                     fields[row][col].setText(cells[row][col].toString());
+                    String text = fields[row][col].getText();
+                    if (text.contains("\uD83C\uDF3F")) {
+                        fields[row][col].setBackground(new Color(200, 255, 0));
+                    } else {
+                        fields[row][col].setBackground(new Color(255, 200, 0));
+                    }
                     fields[row][col].revalidate();
-                    fields[row][col].setRows(rows);
-                    fields[row][col].setColumns(cols);
+                    fields[row][col].setRows(16);
+                    fields[row][col].setColumns(5);
                     panel.add(fields[row][col]);
                     panel.revalidate();
                 }
             }
 
-            infoPane.revalidate();
             contents.add(infoPane, BorderLayout.NORTH);
-            contents.revalidate();
             add(panel);
             pack();
-            setVisible(true);
             invalidate();
+            setVisible(true);
         });
+    }
+
+    public void getMessage(String message) {
+        JOptionPane.showMessageDialog(this, message);
     }
 }

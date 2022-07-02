@@ -1,20 +1,18 @@
-package com.javarush.island.sheff.services;
+package com.javarush.island.sheff.services.tasks;
 
 import com.javarush.island.sheff.entities.map.Cell;
 import com.javarush.island.sheff.entities.organisms.Organism;
 
 import java.util.*;
 
-public class CallEndTurnTask implements Task {
-
-    Cell[] cells;
+public class CallEndTurnTask extends Task {
 
     public CallEndTurnTask(Cell[] cells) {
         this.cells = cells;
     }
 
     @Override
-    public Long call() {
+    public Boolean call() {
 
         Arrays.stream(cells).forEach(cell -> cell.getResidents()
                 .values()
@@ -28,6 +26,6 @@ public class CallEndTurnTask implements Task {
 
         System.out.println("Конец хода");
 
-        return Thread.currentThread().getId();
+        return true;
     }
 }
